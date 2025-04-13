@@ -129,9 +129,9 @@ function showResult(result, nextIndex, isFromEasterEgg = false) {
 
     count++;
 
-    if (count === 25) showMidMessage("지구에게 인간은 어떤 존재인가?");
-    if (count === 40) showMidMessage("인간에게 지구는 필요한 존재이다.");
-    if (count === 50) showMidMessage("지구는 과연 어떨까?");
+    if (count === 5) showMidMessage("지구에게 인간은 어떤 존재인가?");
+    if (count === 10) showMidMessage("인간에게 지구는 필요한 존재이다.");
+    if (count === 15) showMidMessage("지구는 과연 어떨까?");
 
     if (isFromEasterEgg) {
       showingEasterEgg = false;
