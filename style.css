@@ -1,33 +1,36 @@
-
 body {
   background-color: black;
   color: white;
   font-family: 'Courier New', monospace;
   text-align: center;
   margin-top: 20%;
+  font-size: 32px; /* 기본 글자 크기 2배 */
 }
+
 button {
   margin: 10px;
-  padding: 10px 20px;
+  padding: 20px 40px; /* 버튼 크기도 조정 */
   background-color: black;
-  border: 1px solid white;
+  border: 2px solid white;
   color: white;
-  font-size: 16px;
+  font-size: 32px; /* 버튼 글자 크기 2배 */
   cursor: pointer;
 }
+
 button:hover {
   background-color: white;
   color: black;
 }
+
 #music-btn {
   position: fixed;
   bottom: 10px;
   right: 10px;
-  font-size: 12px;
-  padding: 5px 10px;
+  font-size: 24px;
+  padding: 10px 20px;
   opacity: 0.6;
   background: none;
-  border: 1px solid white;
+  border: 2px solid white;
   color: white;
   cursor: pointer;
   z-index: 1000;
@@ -38,12 +41,31 @@ button:hover {
   background: white;
   color: black;
 }
+
 #count-display {
-  font-size: 24px;
-  margin-bottom: 10px;
-  letter-spacing: 2px;
+  font-size: 48px;
+  margin-bottom: 20px;
+  letter-spacing: 4px;
   font-family: 'Courier New', monospace;
-  visibility: hidden; /* 기본 숨김 */
+  visibility: hidden;
+}
+
+#mid-message {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: gray;
+  font-size: 40px; /* 중간 메시지도 2배 */
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+#question-box p,
+.glitch {
+  font-size: 52px; /* 질문 및 결과 텍스트도 크게 */
 }
 
 body::before {
@@ -80,19 +102,6 @@ body::before {
   object-fit: cover;
   z-index: -1;
   opacity: 0.2;
-  pointer-events: none;
-}
-
-#mid-message {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: gray;
-  font-size: 20px;
-  opacity: 0;
-  transition: opacity 0.5s ease;
-  z-index: 1000;
   pointer-events: none;
 }
 
