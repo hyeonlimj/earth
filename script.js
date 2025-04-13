@@ -91,4 +91,11 @@ function showResult(result, isFromEasterEgg = false) {
   }, 2000);
 }
 
+function playBGM() {
+  const audio = document.getElementById("bgm");
+  if (audio.paused) {
+    audio.play();
+  }
+}
+
 window.onload = loadQuestion;
