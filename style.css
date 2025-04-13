@@ -43,4 +43,6 @@ button:hover {
   margin-bottom: 10px;
   letter-spacing: 2px;
   font-family: 'Courier New', monospace;
+  visibility: hidden; /* ✅ 기본은 숨김 */
 }
+
