@@ -1,24 +1,23 @@
-
 const questions = [
   {
     question: "지구멸망까지 남은 시간은 89초이다.",
     options: [
-      { text: "인간이 없는 세계에선?", result: "지구멸망까지 남은 시간은 ∞이다." },
-      { text: "멸망한 후 세계에선?", result: "지구멸멸망까지 남은 시간은 v̵̬͉̬̟̣̩͔͊͗̋̊̇̇̚̚͟ơ̧̭̱̤̟͖̭͎͛͂̍̀͢í̴̧̫̥͙̬̀́̐̾͋̿͑̄̅͢͢d̸̼̙̣͍̪̟̣͉̼̎́̑͌͗͆̓̕이다." }
+      { text: "인간이 없는 세계에선?", result: "지구멸망까지 남은 시간은 ∞이다.", next: 1 },
+      { text: "멸망한 후 세계에선?", result: "지구멸망까지 남은 시간은 void이다.", next: 2 }
     ]
   },
   {
     question: "지구멸망까지 남은 시간은 ∞이다.",
     options: [
-      { text: "인간이 있는 세계에선?", result: "지구멸망까지 남은 시간은 89초이다." },
-      { text: "멸망한 후 세계에선?", result: "지구멸망까지 남은 시간은 v̵̬͉̬̟̣̩͔͊͗̋̊̇̇̚̚͟ơ̧̭̱̤̟͖̭͎͛͂̍̀͢í̴̧̫̥͙̬̀́̐̾͋̿͑̄̅͢͢d̸̼̙̣͍̪̟̣͉̼̎́̑͌͗͆̓̕이다." }
+      { text: "인간이 있는 세계에선?", result: "지구멸망까지 남은 시간은 89초이다.", next: 0 },
+      { text: "멸망한 후 세계에선?", result: "지구멸망까지 남은 시간은 void이다.", next: 2 }
     ]
   },
   {
     question: "지구멸망까지 남은 시간은 ??이다.",
     options: [
-      { text: "인간이 있는 세계에선?", result: "지구멸망까지 남은 시간은 89초이다." },
-      { text: "인간이 없는 세계에선?", result: "지구멸망까지 남은 시간은 ∞이다." }
+      { text: "인간이 있는 세계에선?", result: "지구멸망까지 남은 시간은 89초이다.", next: 0 },
+      { text: "인간이 없는 세계에선?", result: "지구멸망까지 남은 시간은 ∞이다.", next: 1 }
     ]
   }
 ];
@@ -89,9 +88,12 @@ function loadQuestion() {
 }
 
 function handleSelection(selectedOption) {
-  const nextQuestionText = selectedOption.result;
-  showResult(nextQuestionText, showingEasterEgg);
+  const nextQuestionIndex = selectedOption.next;
+  const resultText = selectedOption.result;
+
+  showResult(resultText, nextQuestionIndex);
 }
+
 
 function loadEasterEgg() {
   const q = easterEgg;
@@ -108,7 +110,7 @@ function loadEasterEgg() {
   });
 }
 
-function showResult(result, isFromEasterEgg = false) {
+function showResult(result, nextIndex, isFromEasterEgg = false) {
   const box = document.getElementById("question-box");
   const isVoid = result.includes("void") || result.includes("v͊");
   box.innerHTML = `<p class="${isVoid ? 'glitch' : ''}">${result}</p>`;
@@ -118,18 +120,18 @@ function showResult(result, isFromEasterEgg = false) {
     count++;
     if (isFromEasterEgg) {
       showingEasterEgg = false;
-      current = count % questions.length;
+      current = nextIndex;
       loadQuestion();
     } else {
       if (count % 10 === 0) {
         showingEasterEgg = true;
         loadEasterEgg();
       } else {
-        current = (current + 1) % questions.length;
+        current = nextIndex;
         loadQuestion();
       }
     }
-  }, 2000);
+  }, 1500);
 }
 
 setInterval(toggleCounter, 1000);
