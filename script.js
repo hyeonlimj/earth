@@ -117,16 +117,24 @@ function showResult(result, nextIndex, isFromEasterEgg = false) {
   const isVoid = result.includes("void") || result.includes("v͊");
 
   box.innerHTML = `<p class="${isVoid ? 'glitch' : ''}">${result}</p>`;
-
-  // ⚡ 노이즈 효과 전체 화면 적용
   document.body.classList.add("glitch-effect");
-
   updateTimerDisplay(result);
 
-  // 🎬 3~4초 후 효과 제거 & 다음 질문
   setTimeout(() => {
     document.body.classList.remove("glitch-effect");
     count++;
+
+    // ✅ 여기에 중간 메시지 조건 추가
+    if (count === 25) {
+      showMidMessage("지구에게 인간은 어떤 존재인가?");
+    }
+    if (count === 50) {
+      showMidMessage("인간에게 지구는 필연시한 존재이다.");
+    }
+    if (count === 100) {
+      showMidMessage("지구는 과연 어떨까?");
+    }
+
     if (isFromEasterEgg) {
       showingEasterEgg = false;
       current = nextIndex;
@@ -140,8 +148,9 @@ function showResult(result, nextIndex, isFromEasterEgg = false) {
         loadQuestion();
       }
     }
-  }, 3500); // ← 원하는 지속 시간 (3.5초)
+  }, 3500);
 }
+
 
 setInterval(toggleCounter, 1000);
 window.onload = loadQuestion;
