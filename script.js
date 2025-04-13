@@ -56,14 +56,14 @@ function updateTimerDisplay(text) {
   const display = document.getElementById('count-display');
   if (!display) return;
 
-  if (text.trim() === "지구멸망까지 남은 시간은 89초이다.") {
+  if (text.includes("89초")) {
     display.style.visibility = "visible";
     displayCount = 89;
     direction = -1;
-  } else if (text.trim() === "지구멸망까지 남은 시간은 ∞이다.") {
-    display.textContent = "???:??:??";
+  } else if (text.includes("??")) {
+    display.textContent = "00:00:??";
     display.style.visibility = "visible";
-  } else if (text.trim().startsWith("지구멸망까지 남은 시간은 v")) {
+  } else if (text.includes("void") || text.includes("Ṽ")) {
     display.textContent = "v̵̬͉̬̟̣̩͔͊͗̋̊̇̇̚̚͟ơ̧̭̱̤̟͖̭͎͛͂̍̀͢í̴̧̫̥͙̬̀́̐̾͋̿͑̄̅͢͢d̸̼̙̣͍̪̟̣͉̼̎́̑͌͗͆̓̕";
     display.style.visibility = "visible";
   } else {
