@@ -120,7 +120,7 @@ function showResult(result, nextIndex, isFromEasterEgg = false) {
     document.body.classList.add("glitch-effect");
   }
 
-  const delayTime = isFromEasterEgg ? 6000 : 2000; // 🎯 이스터에그만 4초
+  const delayTime = isFromEasterEgg ? 5000 : 2000; // 🎯 이스터에그만 4초
 
   setTimeout(() => {
     if (isVoid) {
@@ -129,9 +129,9 @@ function showResult(result, nextIndex, isFromEasterEgg = false) {
 
     count++;
 
-    if (count === 5) showMidMessage("지구에게 인간은 어떤 존재인가?");
-    if (count === 10) showMidMessage("인간에게 지구는 필요한 존재이다.");
-    if (count === 15) showMidMessage("지구는 과연 어떨까?");
+    if (count === 15) showMidMessage("지구에게 인간은 어떤 존재인가?");
+    if (count === 25) showMidMessage("인간에게 지구는 필요한 존재이다.");
+    if (count === 30) showMidMessage("지구는 과연 어떨까?");
 
     if (isFromEasterEgg) {
       showingEasterEgg = false;
