@@ -120,7 +120,7 @@ function showResult(result, nextIndex, isFromEasterEgg = false) {
     document.body.classList.add("glitch-effect");
   }
 
-  const delayTime = isFromEasterEgg ? 4000 : 2000; // 🎯 이스터에그만 4초
+  const delayTime = isFromEasterEgg ? 6000 : 2000; // 🎯 이스터에그만 4초
 
   setTimeout(() => {
     if (isVoid) {
