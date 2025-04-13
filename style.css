@@ -46,4 +46,28 @@ button:hover {
   visibility: hidden; /* 기본 숨김 */
 }
 
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: url('https://i.imgur.com/gV8pt7P.gif'); /* 우주+글리치 느낌 GIF */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  animation: shake 0.4s infinite;
+  opacity: 0.15;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+@keyframes shake {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-1px, 1px); }
+  50% { transform: translate(1px, -1px); }
+  75% { transform: translate(-1px, 0); }
+  100% { transform: translate(0, 0); }
+}
 
