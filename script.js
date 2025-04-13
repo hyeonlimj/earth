@@ -104,11 +104,13 @@ function loadEasterEgg() {
   const optionBox = document.getElementById("options");
   q.options.forEach(opt => {
     const btn = document.createElement("button");
+    // ✅ 이스터에그 후 다시 0번 질문으로 돌아가도록 지정
     btn.textContent = opt.text;
-    btn.onclick = () => showResult(opt.result, true);
+    btn.onclick = () => showResult(opt.result, 0, true);
     optionBox.appendChild(btn);
   });
 }
+
 
 function showResult(result, nextIndex, isFromEasterEgg = false) {
   const box = document.getElementById("question-box");
