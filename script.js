@@ -60,7 +60,7 @@ function updateTimerDisplay(text) {
     display.style.visibility = "visible";
     displayCount = 89;
     direction = -1;
-  } else if (text.includes("??")) {
+  } else if (text.includes("∞")) {
     display.textContent = "???:??:??";
     display.style.visibility = "visible";
   } else if (text.includes("void") || text.includes("v͊͗̋̚")) {
