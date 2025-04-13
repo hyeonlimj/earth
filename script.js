@@ -83,9 +83,14 @@ function loadQuestion() {
   q.options.forEach(opt => {
     const btn = document.createElement("button");
     btn.textContent = opt.text;
-    btn.onclick = () => showResult(opt.result);
+    btn.onclick = () => handleSelection(opt);
     optionBox.appendChild(btn);
   });
+}
+
+function handleSelection(selectedOption) {
+  const nextQuestionText = selectedOption.result;
+  showResult(nextQuestionText, showingEasterEgg);
 }
 
 function loadEasterEgg() {
