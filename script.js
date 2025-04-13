@@ -1,4 +1,3 @@
-
 const questions = [
   {
     question: "지구멸망까지 남은 시간은 89초이다.",
@@ -27,11 +26,12 @@ let current = 0;
 
 function loadQuestion() {
   const q = questions[current];
-  document.getElementById("question").textContent = q.question;
+  document.getElementById("question-box").innerHTML = `
+    <p id="question">${q.question}</p>
+    <div id="options"></div>
+  `;
 
   const optionBox = document.getElementById("options");
-  optionBox.innerHTML = "";
-
   q.options.forEach(opt => {
     const btn = document.createElement("button");
     btn.textContent = opt.text;
