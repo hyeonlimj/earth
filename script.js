@@ -115,10 +115,17 @@ function loadEasterEgg() {
 function showResult(result, nextIndex, isFromEasterEgg = false) {
   const box = document.getElementById("question-box");
   const isVoid = result.includes("void") || result.includes("v͊");
+
   box.innerHTML = `<p class="${isVoid ? 'glitch' : ''}">${result}</p>`;
+
+  // ⚡ 노이즈 효과 전체 화면 적용
+  document.body.classList.add("glitch-effect");
+
   updateTimerDisplay(result);
 
+  // 🎬 3~4초 후 효과 제거 & 다음 질문
   setTimeout(() => {
+    document.body.classList.remove("glitch-effect");
     count++;
     if (isFromEasterEgg) {
       showingEasterEgg = false;
@@ -133,7 +140,7 @@ function showResult(result, nextIndex, isFromEasterEgg = false) {
         loadQuestion();
       }
     }
-  }, 1500);
+  }, 3500); // ← 원하는 지속 시간 (3.5초)
 }
 
 setInterval(toggleCounter, 1000);
