@@ -1,16 +1,17 @@
+
 const questions = [
   {
     question: "지구멸망까지 남은 시간은 89초이다.",
     options: [
       { text: "인간이 없는 세계에선?", result: "지구멸망까지 남은 시간은 ∞이다." },
-      { text: "멸망한 후 세계에선?", result: "지구멸망까지 남은 시간은 v̵̬͉̬̟̣̩͔͊͗̋̊̇̇̚̚͟ơ̧̭̱̤̟͖̭͎͛͂̍̀͢í̴̧̫̥͙̬̀́̐̾͋̿͑̄̅͢͢d̸̼̙̣͍̪̟̣͉̼̎́̑͌͗͆̓̕이다." }
+      { text: "멸망한 후 세계에선?", result: "지구멸멸망까지 남은 시간은 v̵̬͉̬̟̣̩͔͊͗̋̊̇̇̚̚͟ơ̧̭̱̤̟͖̭͎͛͂̍̀͢í̴̧̫̥͙̬̀́̐̾͋̿͑̄̅͢͢d̸̼̙̣͍̪̟̣͉̼̎́̑͌͗͆̓̕이다." }
     ]
   },
   {
     question: "지구멸망까지 남은 시간은 ∞이다.",
     options: [
       { text: "인간이 있는 세계에선?", result: "지구멸망까지 남은 시간은 89초이다." },
-      { text: "멸망한 후 세계에선?", result: "지구멸망까지 남은 시간은 v̵̬͉̬̟̣̩͔͊͗̋̊̇̇̚̚͟ơ̧̭̱̤̟͖̭͎͛͂̍̀͢í̴̧̫̥͙̬̀́̐̾͋̿͑̄̅͢͢d̸̼̙̣͍̪̟̣͉̼̎́̑͌͗͆̓̕이다." }
+      { text: "멸망한 후 세계에선?", result: "지구멸멸망까지 남은 시간은 v̵̬͉̬̟̣̩͔͊͗̋̊̇̇̚̚͟ơ̧̭̱̤̟͖̭͎͛͂̍̀͢í̴̧̫̥͙̬̀́̐̾͋̿͑̄̅͢͢d̸̼̙̣͍̪̟̣͉̼̎́̑͌͗͆̓̕이다." }
     ]
   },
   {
@@ -33,6 +34,42 @@ const easterEgg = {
 let current = 0;
 let count = 0;
 let showingEasterEgg = false;
+let displayCount = 89;
+let direction = -1;
+let isCounting = false;
+
+function updateTimerDisplay(text) {
+  const display = document.getElementById('count-display');
+  if (!display) return;
+
+  if (text.includes("89초")) {
+    display.style.visibility = "visible";
+    displayCount = 89;
+    direction = -1;
+    isCounting = true;
+  } else if (text.includes("??")) {
+    display.textContent = "00:00:??";
+    display.style.visibility = "visible";
+    isCounting = false;
+  } else if (text.includes("void") || text.includes("v͊")) {
+    display.textContent = "v̵̬͉̬̟̣̩͔͊͗̋̊̇̇̚̚͟ơ̧̭̱̤̟͖̭͎͛͂̍̀͢í̴̧̫̥͙̬̀́̐̾͋̿͑̄̅͢͢d̸̼̙̣͍̪̟̣͉̼̎́̑͌͗͆̓̕";
+    display.style.visibility = "visible";
+    isCounting = false;
+  } else {
+    display.style.visibility = "hidden";
+    isCounting = false;
+  }
+}
+
+function toggleCounter() {
+  const display = document.getElementById('count-display');
+  if (!display || !isCounting) return;
+  display.textContent = `00:00:${displayCount}`;
+  displayCount += direction;
+  if (displayCount <= 88 || displayCount >= 89) {
+    direction *= -1;
+  }
+}
 
 function loadQuestion() {
   const q = questions[current];
@@ -40,8 +77,7 @@ function loadQuestion() {
     <p id="question">${q.question}</p>
     <div id="options"></div>
   `;
-
-  updateTimerDisplay(q.question); // ✅ 추가
+  updateTimerDisplay(q.question);
 
   const optionBox = document.getElementById("options");
   q.options.forEach(opt => {
@@ -52,32 +88,12 @@ function loadQuestion() {
   });
 }
 
-function updateTimerDisplay(text) {
-  const display = document.getElementById('count-display');
-  if (!display) return;
-
-  if (text.includes("89초")) {
-    display.style.visibility = "visible";
-    displayCount = 89;
-    direction = -1;
-  } else if (text.includes("??")) {
-    display.textContent = "00:00:??";
-    display.style.visibility = "visible";
-  } else if (text.includes("void") || text.includes("Ṽ")) {
-    display.textContent = "v̵̬͉̬̟̣̩͔͊͗̋̊̇̇̚̚͟ơ̧̭̱̤̟͖̭͎͛͂̍̀͢í̴̧̫̥͙̬̀́̐̾͋̿͑̄̅͢͢d̸̼̙̣͍̪̟̣͉̼̎́̑͌͗͆̓̕";
-    display.style.visibility = "visible";
-  } else {
-    display.style.visibility = "hidden";
-  }
-}
-
 function loadEasterEgg() {
   const q = easterEgg;
   document.getElementById("question-box").innerHTML = `
     <p id="question">${q.question}</p>
     <div id="options"></div>
   `;
-
   const optionBox = document.getElementById("options");
   q.options.forEach(opt => {
     const btn = document.createElement("button");
@@ -91,8 +107,7 @@ function showResult(result, isFromEasterEgg = false) {
   const box = document.getElementById("question-box");
   const isVoid = result.includes("void") || result.includes("v͊");
   box.innerHTML = `<p class="${isVoid ? 'glitch' : ''}">${result}</p>`;
-
-  updateTimerDisplay(result); // ✅ 여기에도 추가
+  updateTimerDisplay(result);
 
   setTimeout(() => {
     count++;
@@ -112,28 +127,5 @@ function showResult(result, isFromEasterEgg = false) {
   }, 1000);
 }
 
-function playBGM() {
-  const audio = document.getElementById("bgm");
-  if (audio.paused) {
-    audio.play();
-  }
-}
-
-// HTML에서 표시할 영역이 있다고 가정: <div id="count-display">00:00:89</div>
-let displayCount = 89;
-let direction = -1;
-
-function toggleCounter() {
-  const display = document.getElementById('count-display');
-  if (!display) return;
-
-  display.textContent = `00:00:${displayCount}`;
-  displayCount += direction;
-  if (displayCount <= 88 || displayCount >= 89) {
-    direction *= -1;
-  }
-}
-
 setInterval(toggleCounter, 1000);
-
 window.onload = loadQuestion;
