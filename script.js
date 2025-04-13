@@ -129,7 +129,7 @@ function showResult(result, isFromEasterEgg = false) {
         loadQuestion();
       }
     }
-  }, 1500);
+  }, 2000);
 }
 
 setInterval(toggleCounter, 1000);
