@@ -14,7 +14,7 @@ const questions = [
     ]
   },
   {
-    question: "지구멸망까지 남은 시간은 ??이다.",
+    question: "지구멸망까지 남은 시간은 v̵̬͉̬̟̣̩͔͊͗̋̊̇̇̚̚͟ơ̧̭̱̤̟͖̭͎͛͂̍̀͢í̴̧̫̥͙̬̀́̐̾͋̿͑̄̅͢͢d̸̼̙̣͍̪̟̣͉̼̎́̑͌͗͆̓̕이다.",
     options: [
       { text: "인간이 있는 세계에선?", result: "지구멸망까지 남은 시간은 89초이다." },
       { text: "인간이 없는 세계에선?", result: "지구멸망까지 남은 시간은 ∞이다." }
@@ -56,15 +56,15 @@ function updateTimerDisplay(text) {
   const display = document.getElementById('count-display');
   if (!display) return;
 
-  if (text.includes("89초")) {
+  if (text.trim() === "지구멸망까지 남은 시간은 89초이다.") {
     display.style.visibility = "visible";
     displayCount = 89;
     direction = -1;
-  } else if (text.includes("∞")) {
+  } else if (text.trim() === "지구멸망까지 남은 시간은 ∞이다.") {
     display.textContent = "???:??:??";
     display.style.visibility = "visible";
-  } else if (text.includes("void") || text.includes("v͊͗̋̚")) {
-    display.textContent = "v̵̬͉̬̟̣̩͔͊͗̋̊̇̇̚̚͟ơ̧̭̱̤̟͖̭͎͛͂̍̀͢...";
+  } else if (text.trim().startsWith("지구멸망까지 남은 시간은 v")) {
+    display.textContent = "v̵̬͉̬̟̣̩͔͊͗̋̊̇̇̚̚͟ơ̧̭̱̤̟͖̭͎͛͂̍̀͢í̴̧̫̥͙̬̀́̐̾͋̿͑̄̅͢͢d̸̼̙̣͍̪̟̣͉̼̎́̑͌͗͆̓̕";
     display.style.visibility = "visible";
   } else {
     display.style.visibility = "hidden";
