@@ -115,21 +115,22 @@ function showResult(result, nextIndex, isFromEasterEgg = false) {
   box.innerHTML = `<p class="${isVoid ? 'glitch' : ''}">${result}</p>`;
   updateTimerDisplay(result);
 
-  // 👉 glitch 효과를 먼저 2초만!
+  // 👉 void일 때만 노이즈 효과
   if (isVoid) {
     document.body.classList.add("glitch-effect");
-    setTimeout(() => {
-      document.body.classList.remove("glitch-effect");
-    }, 500); // 2초 후 제거
   }
 
-  // 👉 질문 전환은 3.5초 후 진행
+  const delayTime = isFromEasterEgg ? 4000 : 2000; // 🎯 이스터에그만 4초
+
   setTimeout(() => {
+    if (isVoid) {
+      document.body.classList.remove("glitch-effect");
+    }
+
     count++;
 
-    // 💬 중간 메시지 조건
     if (count === 25) showMidMessage("지구에게 인간은 어떤 존재인가?");
-    if (count === 40) showMidMessage("인간에게 지구는 필연시한 존재이다.");
+    if (count === 40) showMidMessage("인간에게 지구는 필요한 존재이다.");
     if (count === 50) showMidMessage("지구는 과연 어떨까?");
 
     if (isFromEasterEgg) {
@@ -145,7 +146,7 @@ function showResult(result, nextIndex, isFromEasterEgg = false) {
         loadQuestion();
       }
     }
-  }, 1000); // 질문 전환 시간은 3.5초로 유지
+  }, delayTime);
 }
 
 
