@@ -61,11 +61,12 @@ function updateTimerDisplay(text) {
   if (trimmed === "지구멸망까지 남은 시간은 89초이다.") {
     display.style.visibility = "visible";
     direction = -1;
+    display.textContent = `00:00:${displayCount}`;
   } else if (trimmed === "지구멸망까지 남은 시간은 ∞이다.") {
     display.textContent = "???:??:??";
     display.style.visibility = "visible";
   } else if (trimmed.startsWith("지구멸망까지 남은 시간은 v")) {
-    display.textContent = "v̷̸̡̜͚̘̝̖͈̗̜͎͇̦͚͌͑͋̾̀̀͜͜o̶̵͈̥͙̫͔̜̪̤̞͕̥̖̪͓͓̗̊͋̈́̐̄̏̇̓͋̒̽̇͊̕̚̕͜i̷̸͈͎̙̗͚̪͕͖͍̯̫͓͎͚̍̾̿̅̐̀̿̀͂̿͌͆̆̕͠d̴̷̨̰̝͙̗͖͙̰̟̯̻̯̜͚́͗̐͆̌̓̔̓͑͌̈́͛̅̕̕̚...";
+    display.textContent = "v̵̬͉̬̟̣͔͊͗̋̊̇̇̚̚͟ơ̧̭̱̤̟͖̭͎͛͂̍̀͢í̴̧̫̥͙̬̐̾̋̿͑̄̅͢͢d̸̼̙̣͍̪̟̣͉̼̎́̑͌͗͆̓̕";
     display.style.visibility = "visible";
   } else {
     display.style.visibility = "hidden";
@@ -127,17 +128,19 @@ let direction = -1;
 
 function toggleCounter() {
   const display = document.getElementById('count-display');
-  if (!display) return;
+  if (!display || display.style.visibility !== 'visible') return;
 
-  // 89초일 때만 반복
-  if (display.textContent.includes("00:00:")) {
-    display.textContent = `00:00:${displayCount}`;
-    displayCount += direction;
-    if (displayCount <= 88 || displayCount >= 89) {
-      direction *= -1;
-    }
+  // display에 89 타이머가 아닌 경우에는 정지
+  if (!display.textContent.startsWith("00:00:")) return;
+
+  display.textContent = `00:00:${displayCount}`;
+  displayCount += direction;
+
+  if (displayCount <= 88 || displayCount >= 89) {
+    direction *= -1;
   }
 }
+
 
 
 setInterval(toggleCounter, 1000);
