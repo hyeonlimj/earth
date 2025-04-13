@@ -56,20 +56,22 @@ function updateTimerDisplay(text) {
   const display = document.getElementById('count-display');
   if (!display) return;
 
-  if (text.trim() === "지구멸망까지 남은 시간은 89초이다.") {
+  const trimmed = text.trim();
+
+  if (trimmed === "지구멸망까지 남은 시간은 89초이다.") {
     display.style.visibility = "visible";
-    displayCount = 89;
     direction = -1;
-  } else if (text.trim() === "지구멸망까지 남은 시간은 ∞이다.") {
+  } else if (trimmed === "지구멸망까지 남은 시간은 ∞이다.") {
     display.textContent = "???:??:??";
     display.style.visibility = "visible";
-  } else if (text.trim().startsWith("지구멸망까지 남은 시간은 v")) {
-    display.textContent = "v̵̬͉̬̟̣̩͔͊͗̋̊̇̇̚̚͟ơ̧̭̱̤̟͖̭͎͛͂̍̀͢í̴̧̫̥͙̬̀́̐̾͋̿͑̄̅͢͢d̸̼̙̣͍̪̟̣͉̼̎́̑͌͗͆̓̕";
+  } else if (trimmed.startsWith("지구멸망까지 남은 시간은 v")) {
+    display.textContent = "v̷̸̡̜͚̘̝̖͈̗̜͎͇̦͚͌͑͋̾̀̀͜͜o̶̵͈̥͙̫͔̜̪̤̞͕̥̖̪͓͓̗̊͋̈́̐̄̏̇̓͋̒̽̇͊̕̚̕͜i̷̸͈͎̙̗͚̪͕͖͍̯̫͓͎͚̍̾̿̅̐̀̿̀͂̿͌͆̆̕͠d̴̷̨̰̝͙̗͖͙̰̟̯̻̯̜͚́͗̐͆̌̓̔̓͑͌̈́͛̅̕̕̚...";
     display.style.visibility = "visible";
   } else {
     display.style.visibility = "hidden";
   }
 }
+
 
 function loadEasterEgg() {
   const q = easterEgg;
@@ -127,12 +129,16 @@ function toggleCounter() {
   const display = document.getElementById('count-display');
   if (!display) return;
 
-  display.textContent = `00:00:${displayCount}`;
-  displayCount += direction;
-  if (displayCount <= 88 || displayCount >= 89) {
-    direction *= -1;
+  // 89초일 때만 반복
+  if (display.textContent.includes("00:00:")) {
+    display.textContent = `00:00:${displayCount}`;
+    displayCount += direction;
+    if (displayCount <= 88 || displayCount >= 89) {
+      direction *= -1;
+    }
   }
 }
+
 
 setInterval(toggleCounter, 1000);
 
