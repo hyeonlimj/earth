@@ -149,7 +149,7 @@ function showResult(result, nextIndex, isFromEasterEgg = false) {
         loadQuestion();
       }
     }
-  }, 100);
+  }, 500);
 }
 
 // ✅ 중간 메시지 함수는 함수 바깥에 위치해야 함
