@@ -22,6 +22,7 @@ const questions = [
   }
 ];
 
+
 const easterEgg = {
   question: "이것이 정말 끝이 맞을까요?",
   options: [
