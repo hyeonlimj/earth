@@ -88,7 +88,7 @@ function showResult(result, isFromEasterEgg = false) {
         loadQuestion();
       }
     }
-  }, 2000);
+  }, 1000);
 }
 
 function playBGM() {
