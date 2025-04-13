@@ -98,4 +98,21 @@ function playBGM() {
   }
 }
 
+// HTML에서 표시할 영역이 있다고 가정: <div id="count-display">00:00:89</div>
+let displayCount = 89;
+let direction = -1;
+
+function toggleCounter() {
+  const display = document.getElementById('count-display');
+  if (!display) return;
+
+  display.textContent = `00:00:${displayCount}`;
+  displayCount += direction;
+  if (displayCount <= 88 || displayCount >= 89) {
+    direction *= -1;
+  }
+}
+
+setInterval(toggleCounter, 1000);
+
 window.onload = loadQuestion;
