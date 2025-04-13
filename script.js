@@ -120,7 +120,7 @@ function showResult(result, nextIndex, isFromEasterEgg = false) {
     document.body.classList.add("glitch-effect");
     setTimeout(() => {
       document.body.classList.remove("glitch-effect");
-    }, 1000); // 2초 후 제거
+    }, 500); // 2초 후 제거
   }
 
   // 👉 질문 전환은 3.5초 후 진행
