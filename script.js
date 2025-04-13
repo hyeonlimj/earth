@@ -25,8 +25,8 @@ const questions = [
 const easterEgg = {
   question: "이것이 정말 끝이 맞을까요?",
   options: [
-    { text: "반복은 신의 장난이야", result: "당신은 순환 속에 있습니다." },
-    { text: "모든 건 패턴일 뿐", result: "깨달음은 여기에 없습니다." }
+    { text: "반복은 영원이야", result: "당신은 순환 속에 있습니다." },
+    { text: "모든 건 우연일 뿐", result: "깨달음은 여기에 없습니다." }
   ]
 };
 
