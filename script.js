@@ -90,10 +90,8 @@ function loadQuestion() {
 function handleSelection(selectedOption) {
   const nextQuestionIndex = selectedOption.next;
   const resultText = selectedOption.result;
-
   showResult(resultText, nextQuestionIndex);
 }
-
 
 function loadEasterEgg() {
   const q = easterEgg;
@@ -104,27 +102,30 @@ function loadEasterEgg() {
   const optionBox = document.getElementById("options");
   q.options.forEach(opt => {
     const btn = document.createElement("button");
-    // ✅ 이스터에그 후 다시 0번 질문으로 돌아가도록 지정
     btn.textContent = opt.text;
     btn.onclick = () => showResult(opt.result, 0, true);
     optionBox.appendChild(btn);
   });
 }
 
-
 function showResult(result, nextIndex, isFromEasterEgg = false) {
   const box = document.getElementById("question-box");
   const isVoid = result.includes("void") || result.includes("v͊");
 
   box.innerHTML = `<p class="${isVoid ? 'glitch' : ''}">${result}</p>`;
-  document.body.classList.add("glitch-effect");
   updateTimerDisplay(result);
 
+  if (isVoid) {
+    document.body.classList.add("glitch-effect");
+  }
+
   setTimeout(() => {
-    document.body.classList.remove("glitch-effect");
+    if (isVoid) {
+      document.body.classList.remove("glitch-effect");
+    }
+
     count++;
 
-    // ✅ 여기에 중간 메시지 조건 추가
     if (count === 25) {
       showMidMessage("지구에게 인간은 어떤 존재인가?");
     }
@@ -148,9 +149,19 @@ function showResult(result, nextIndex, isFromEasterEgg = false) {
         loadQuestion();
       }
     }
-  }, 3500);
+  }, 1500);
 }
 
+// ✅ 중간 메시지 함수는 함수 바깥에 위치해야 함
+function showMidMessage(message) {
+  const msgBox = document.getElementById("mid-message");
+  msgBox.textContent = message;
+  msgBox.style.opacity = "1";
+
+  setTimeout(() => {
+    msgBox.style.opacity = "0";
+  }, 3000);
+}
 
 setInterval(toggleCounter, 1000);
 window.onload = loadQuestion;
