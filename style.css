@@ -106,5 +106,5 @@ body::before {
 }
 
 .glitch-effect {
-  animation: glitchNoise 0.2s 1;
+  animation: glitchNoise 0.2s infinite;
 }
