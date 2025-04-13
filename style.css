@@ -1,28 +1,21 @@
-body, html {
-  margin: 0;
-  padding: 0;
-  font-family: 'Courier New', monospace;
+
+body {
   background-color: black;
   color: white;
-  height: 100vh;
-  overflow: hidden;
-}
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  font-family: 'Courier New', monospace;
   text-align: center;
+  margin-top: 20%;
 }
 button {
-  background: none;
+  margin: 10px;
+  padding: 10px 20px;
+  background-color: black;
   border: 1px solid white;
   color: white;
-  padding: 10px 20px;
-  margin: 10px;
+  font-size: 16px;
   cursor: pointer;
 }
 button:hover {
-  background: white;
+  background-color: white;
   color: black;
 }
