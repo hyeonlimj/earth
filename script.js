@@ -124,7 +124,7 @@ function showResult(result, isFromEasterEgg = false) {
         loadQuestion();
       }
     }
-  }, 1000);
+  }, 1500);
 }
 
 setInterval(toggleCounter, 1000);
