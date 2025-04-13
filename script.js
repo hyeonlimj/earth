@@ -22,7 +22,6 @@ const questions = [
   }
 ];
 
-
 const easterEgg = {
   question: "이것이 정말 끝이 맞을까요?",
   options: [
@@ -57,23 +56,20 @@ function updateTimerDisplay(text) {
   const display = document.getElementById('count-display');
   if (!display) return;
 
-  const trimmed = text.trim();
-
-  if (trimmed === "지구멸망까지 남은 시간은 89초이다.") {
+  if (text.trim() === "지구멸망까지 남은 시간은 89초이다.") {
     display.style.visibility = "visible";
+    displayCount = 89;
     direction = -1;
-    display.textContent = `00:00:${displayCount}`;
-  } else if (trimmed === "지구멸망까지 남은 시간은 ∞이다.") {
+  } else if (text.trim() === "지구멸망까지 남은 시간은 ∞이다.") {
     display.textContent = "???:??:??";
     display.style.visibility = "visible";
-  } else if (trimmed.startsWith("지구멸망까지 남은 시간은 v")) {
-    display.textContent = "v̵̬͉̬̟̣͔͊͗̋̊̇̇̚̚͟ơ̧̭̱̤̟͖̭͎͛͂̍̀͢í̴̧̫̥͙̬̐̾̋̿͑̄̅͢͢d̸̼̙̣͍̪̟̣͉̼̎́̑͌͗͆̓̕";
+  } else if (text.trim().startsWith("지구멸망까지 남은 시간은 v")) {
+    display.textContent = "v̵̬͉̬̟̣̩͔͊͗̋̊̇̇̚̚͟ơ̧̭̱̤̟͖̭͎͛͂̍̀͢í̴̧̫̥͙̬̀́̐̾͋̿͑̄̅͢͢d̸̼̙̣͍̪̟̣͉̼̎́̑͌͗͆̓̕";
     display.style.visibility = "visible";
   } else {
     display.style.visibility = "hidden";
   }
 }
-
 
 function loadEasterEgg() {
   const q = easterEgg;
@@ -129,20 +125,14 @@ let direction = -1;
 
 function toggleCounter() {
   const display = document.getElementById('count-display');
-  if (!display || display.style.visibility !== 'visible') return;
-
-  // display에 89 타이머가 아닌 경우에는 정지
-  if (!display.textContent.startsWith("00:00:")) return;
+  if (!display) return;
 
   display.textContent = `00:00:${displayCount}`;
   displayCount += direction;
-
   if (displayCount <= 88 || displayCount >= 89) {
     direction *= -1;
   }
 }
-
-
 
 setInterval(toggleCounter, 1000);
 
