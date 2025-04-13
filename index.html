@@ -6,10 +6,17 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<audio id="bgm" autoplay loop>
+  <source src="bgm.mp3" type="audio/mpeg">
+</audio>
+
   <div id="question-box">
     <p id="question">불러오는 중...</p>
     <div id="options"></div>
   </div>
+
+  <button onclick="document.getElementById('bgm').play()">▶ 음악 켜기</button>
+
   <script src="script.js"></script>
 </body>
 </html>
