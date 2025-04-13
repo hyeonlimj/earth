@@ -41,6 +41,8 @@ function loadQuestion() {
     <div id="options"></div>
   `;
 
+  updateTimerDisplay(q.question); // ✅ 추가
+
   const optionBox = document.getElementById("options");
   q.options.forEach(opt => {
     const btn = document.createElement("button");
@@ -48,6 +50,25 @@ function loadQuestion() {
     btn.onclick = () => showResult(opt.result);
     optionBox.appendChild(btn);
   });
+}
+
+function updateTimerDisplay(text) {
+  const display = document.getElementById('count-display');
+  if (!display) return;
+
+  if (text.includes("89초")) {
+    display.style.visibility = "visible";
+    displayCount = 89;
+    direction = -1;
+  } else if (text.includes("??")) {
+    display.textContent = "???:??:??";
+    display.style.visibility = "visible";
+  } else if (text.includes("void") || text.includes("v͊͗̋̚")) {
+    display.textContent = "v̵̬͉̬̟̣̩͔͊͗̋̊̇̇̚̚͟ơ̧̭̱̤̟͖̭͎͛͂̍̀͢...";
+    display.style.visibility = "visible";
+  } else {
+    display.style.visibility = "hidden";
+  }
 }
 
 function loadEasterEgg() {
@@ -69,15 +90,15 @@ function loadEasterEgg() {
 function showResult(result, isFromEasterEgg = false) {
   const box = document.getElementById("question-box");
   const isVoid = result.includes("void") || result.includes("v͊");
-
   box.innerHTML = `<p class="${isVoid ? 'glitch' : ''}">${result}</p>`;
+
+  updateTimerDisplay(result); // ✅ 여기에도 추가
 
   setTimeout(() => {
     count++;
-
     if (isFromEasterEgg) {
       showingEasterEgg = false;
-      current = count % questions.length; // 원래대로 복귀
+      current = count % questions.length;
       loadQuestion();
     } else {
       if (count % 10 === 0) {
