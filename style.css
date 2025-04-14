@@ -1,28 +1,33 @@
-
 body {
   background-color: black;
   color: white;
   font-family: 'Courier New', monospace;
   text-align: center;
-  margin-top: 20%;
+  margin-top: 30%; /* 20% → 30% */
+  font-size: 24px; /* 기본 글자 크기 추가 */
 }
 
 button {
-  margin: 20px;
-  padding: 20px 30px;
+  margin: 15px; /* 10px → 15px */
+  padding: 15px 30px; /* 10px 20px → 15px 30px */
   background-color: black;
   border: 1px solid white;
   color: white;
-  font-size: 21px;
+  font-size: 24px; /* 16px → 24px */
   cursor: pointer;
+}
+
+button:hover {
+  background-color: white;
+  color: black;
 }
 
 #music-btn {
   position: fixed;
   bottom: 10px;
   right: 10px;
-  font-size: 12px;
-  padding: 5px 10px;
+  font-size: 18px; /* 12px → 18px */
+  padding: 8px 15px; /* 5px 10px → 8px 15px */
   opacity: 0.6;
   background: none;
   border: 1px solid white;
@@ -36,69 +41,16 @@ button {
   background: white;
   color: black;
 }
+
 #count-display {
-  font-size: 28px;
-  margin-bottom: 10px;
-  letter-spacing: 2px;
+  font-size: 36px; /* 24px → 36px */
+  margin-bottom: 15px;
+  letter-spacing: 3px; /* 2px → 3px */
   font-family: 'Courier New', monospace;
-  visibility: hidden; /* 기본 숨김 */
+  visibility: hidden;
 }
 
 body::before {
   content: "";
   position: fixed;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  background: url('https://i.imgur.com/gV8pt7P.gif'); /* 우주+글리치 느낌 GIF */
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  animation: shake 0.4s infinite;
-  opacity: 0.15;
-  mix-blend-mode: screen;
-  pointer-events: none;
-}
-
-@keyframes shake {
-  0% { transform: translate(0, 0); }
-  25% { transform: translate(-1px, 1px); }
-  50% { transform: translate(1px, -1px); }
-  75% { transform: translate(-1px, 0); }
-  100% { transform: translate(0, 0); }
-}
-
-#bg-video {
-  position: fixed;
-  top: 0;
-  left: 0;
-  min-width: 100%;
-  min-height: 100%;
-  object-fit: cover;
-  z-index: -1;
-  opacity: 0.2;
-  pointer-events: none;
-}
-
-#mid-message {
-  position: fixed;
-  top: 60%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: gray;
-  font-size: 24px;
-  opacity: 0;
-  transition: opacity 0.5s ease;
-  z-index: 1000;
-  pointer-events: none;
-}
-
-@keyframes glitchNoise {
-  0% { filter: contrast(1) brightness(1); transform: translate(0, 0); }
-  20% { filter: contrast(1.5) brightness(1.2); transform: translate(-2px, 1px); }
-  40% { filter: contrast(0.8) brightness(0.8); transform: translate(2px, -2px); }
-  60% { filter: contrast(1.2) brightness(1.5); transform: translate(-1px, 2px); }
-  80% { filter: contrast(1) brightness(1); transform: translate(1px, -1px); }
-  100% { filter: contrast(1) brightness(1); transform: translate(0, 0); }
-}
+  top
