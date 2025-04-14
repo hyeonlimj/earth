@@ -24,7 +24,7 @@ button:hover {
 
 #question-box {
   position: absolute;
-  top: 40%;
+  top: 30%;
   left: 50%;
   transform: translateX(-50%);
   width: auto;
@@ -119,7 +119,7 @@ body::before {
 
 #mid-message {
   position: fixed;
-  top: 70%;
+  top: 60%;
   left: 50%;
   transform: translate(-50%, -50%);
   color: gray;
