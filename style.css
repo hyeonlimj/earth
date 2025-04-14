@@ -7,30 +7,6 @@ body {
   margin-top: 20%;
 }
 
-#question-box {
-  position: absolute;
-  top: 15%; /* 너무 위로 몰리지 않도록 조정 */
-  left: 50%;
-  transform: translateX(-50%);
-  width: 90%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  background-color: rgba(0, 0, 0, 0.5); /* 반투명 배경으로 가독성 향상 */
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(255,255,255,0.1); /* 부드러운 외곽 효과 */
-  max-width: 600px;
-}
-
-#question-box p,
-.glitch {
-  font-size: 26px;
-  line-height: 1.6;
-  margin: 0 0 10px;
-}
-
 button {
   margin: 20px;
   padding: 20px 30px;
