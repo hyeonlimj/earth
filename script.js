@@ -112,15 +112,20 @@ function showResult(result, nextIndex, isFromEasterEgg = false) {
   const box = document.getElementById("question-box");
   const isVoid = result.includes("void") || result.includes("v͊");
 
-  box.innerHTML = `<p class="${isVoid ? 'glitch' : ''}">${result}</p>`;
+  // ✅ glitch 효과를 정확히 void에만 적용
+  let displayText = result;
+  if (isVoid) {
+    displayText = result.replace(/(v͊.*?d̎[^ ]*)/gi, '<span class="glitch" data-text="$1">$1</span>');
+  }
+
+  box.innerHTML = `<p>${displayText}</p>`;
   updateTimerDisplay(result);
 
-  // 👉 void일 때만 노이즈 효과
   if (isVoid) {
     document.body.classList.add("glitch-effect");
   }
 
-  const delayTime = isFromEasterEgg ? 4000 : 2000; // 🎯 이스터에그만 4초
+  const delayTime = isFromEasterEgg ? 4000 : 2000;
 
   setTimeout(() => {
     if (isVoid) {
@@ -148,6 +153,7 @@ function showResult(result, nextIndex, isFromEasterEgg = false) {
     }
   }, delayTime);
 }
+
 
 
 // ✅ 중간 메시지 함수는 함수 바깥에 위치해야 함
