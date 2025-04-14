@@ -1,15 +1,10 @@
-#question-box {
-  position: absolute;
-  top: 15%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 90%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 15px;
-  background-color: rgba(0, 0, 0, 0.5); /* 반투명하게 변경 */
+body {
+  background-color: black;
   color: white;
+  font-family: 'Courier New', monospace;
+  text-align: center;
+  margin-top: 10%;
+  font-size: 21px; /* 기본 글자 크기 2배 */
 }
 
 button {
@@ -20,7 +15,6 @@ button {
   color: white;
   font-size: 21px; /* 버튼 글자 크기 2배 */
   cursor: pointer;
-  text-shadow: 0 0 5px black;
 }
 
 button:hover {
@@ -33,7 +27,7 @@ button:hover {
   bottom: 10px;
   right: 10px;
   font-size: 14px;
-  padding: 10px 20px;
+  padding: 5px 15px;
   opacity: 0.6;
   background: none;
   border: 2px solid white;
@@ -49,9 +43,11 @@ button:hover {
 }
 
 #count-display {
-  font-size: 36px;
-  visibility: hidden;
+  font-size: 21px;
+  margin-bottom: 20px;
   letter-spacing: 4px;
+  font-family: 'Courier New', monospace;
+  visibility: hidden;
 }
 
 #mid-message {
@@ -60,7 +56,7 @@ button:hover {
   left: 50%;
   transform: translate(-50%, -50%);
   color: gray;
-  font-size: 30px; /* 중간 메시지도 2배 */
+  font-size: 26px; /* 중간 메시지도 2배 */
   opacity: 0;
   transition: opacity 0.5s ease;
   z-index: 1000;
@@ -69,7 +65,7 @@ button:hover {
 
 #question-box p,
 .glitch {
-  font-size: 24px; /* 질문 및 결과 텍스트도 크게 */
+  font-size: 26px; /* 질문 및 결과 텍스트도 크게 */
 }
 
 body::before {
@@ -85,6 +81,7 @@ body::before {
   background-position: center;
   animation: shake 0.4s infinite;
   opacity: 0.15;
+  mix-blend-mode: screen;
   pointer-events: none;
 }
 
@@ -104,7 +101,7 @@ body::before {
   min-height: 100%;
   object-fit: cover;
   z-index: -1;
-  opacity: 0.5;
+  opacity: 0.2;
   pointer-events: none;
 }
 
