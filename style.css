@@ -1,10 +1,9 @@
-body {
-  background-color: black;
-  color: white;
-  font-family: 'Courier New', monospace;
-  text-align: center;
-  margin-top: 20%;
-  font-size: 21px; /* 기본 글자 크기 2배 */
+#question-box {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
 }
 
 button {
