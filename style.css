@@ -1,6 +1,6 @@
 #question-box {
   position: absolute;
-  top: 5%;
+  top: 15%;
   left: 50%;
   transform: translateX(-50%);
   width: 90%;
@@ -8,7 +8,7 @@
   flex-direction: column;
   align-items: center;
   gap: 15px;
-  background-color: black; /* 보장 */
+  background-color: rgba(0, 0, 0, 0.5); /* 반투명하게 변경 */
   color: white;
 }
 
