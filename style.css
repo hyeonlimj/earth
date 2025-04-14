@@ -1,36 +1,33 @@
+
 body {
   background-color: black;
   color: white;
   font-family: 'Courier New', monospace;
   text-align: center;
-  margin-top: 10%;
-  font-size: 21px; /* 기본 글자 크기 2배 */
+  margin-top: 20%;
 }
-
 button {
   margin: 10px;
-  padding: 10px 30px; /* 버튼 크기도 조정 */
+  padding: 10px 20px;
   background-color: black;
-  border: 2px solid white;
+  border: 1px solid white;
   color: white;
-  font-size: 21px; /* 버튼 글자 크기 2배 */
+  font-size: 16px;
   cursor: pointer;
 }
-
 button:hover {
   background-color: white;
   color: black;
 }
-
 #music-btn {
   position: fixed;
   bottom: 10px;
   right: 10px;
-  font-size: 14px;
-  padding: 5px 15px;
+  font-size: 12px;
+  padding: 5px 10px;
   opacity: 0.6;
   background: none;
-  border: 2px solid white;
+  border: 1px solid white;
   color: white;
   cursor: pointer;
   z-index: 1000;
@@ -41,31 +38,12 @@ button:hover {
   background: white;
   color: black;
 }
-
 #count-display {
-  font-size: 21px;
-  margin-bottom: 20px;
-  letter-spacing: 4px;
+  font-size: 24px;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
   font-family: 'Courier New', monospace;
-  visibility: hidden;
-}
-
-#mid-message {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: gray;
-  font-size: 26px; /* 중간 메시지도 2배 */
-  opacity: 0;
-  transition: opacity 0.5s ease;
-  z-index: 1000;
-  pointer-events: none;
-}
-
-#question-box p,
-.glitch {
-  font-size: 26px; /* 질문 및 결과 텍스트도 크게 */
+  visibility: hidden; /* 기본 숨김 */
 }
 
 body::before {
@@ -105,6 +83,19 @@ body::before {
   pointer-events: none;
 }
 
+#mid-message {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: gray;
+  font-size: 20px;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: 1000;
+  pointer-events: none;
+}
+
 @keyframes glitchNoise {
   0% { filter: contrast(1) brightness(1); transform: translate(0, 0); }
   20% { filter: contrast(1.5) brightness(1.2); transform: translate(-2px, 1px); }
@@ -112,8 +103,4 @@ body::before {
   60% { filter: contrast(1.2) brightness(1.5); transform: translate(-1px, 2px); }
   80% { filter: contrast(1) brightness(1); transform: translate(1px, -1px); }
   100% { filter: contrast(1) brightness(1); transform: translate(0, 0); }
-}
-
-.glitch-effect {
-  animation: glitchNoise 0.2s infinite;
 }
