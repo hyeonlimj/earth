@@ -1,33 +1,35 @@
 const questions = [
   {
-    question: "There are 89 seconds left until Earth's destruction.",
+    question: "지구멸망까지 남은 시간은 89초이다.",
     options: [
-      { text: "In a world without humans?", result: "Time left until Earth's destruction: ∞", next: 1 },
-      { text: "In a world after destruction?", result: "Time left until Earth's destruction: v̵̬͉̬̟̣̩͔͊͗̋̊̇̇̚̚͟ơ̧̭̱̤̟͖̭͎͛͂̍̀͢í̴̧̫̥͙̬̀́̐̾͋̿͑̄̅͢͢d̸̼̙̣͍̪̟̣͉̼̎́̑͌͗͆̓̕", next: 2 }
+      { text: "인간이 없는 세계에선?", result: "지구멸망까지 남은 시간은 ∞이다.", next: 1 },
+      { text: "멸망한 후 세계에선?", result: "지구멸망까지 남은 시간은 v̵̬͉̬̟̣̩͔͊͗̋̊̇̇̚̚͟ơ̧̭̱̤̟͖̭͎͛͂̍̀͢í̴̧̫̥͙̬̀́̐̾͋̿͑̄̅͢͢d̸̼̙̣͍̪̟̣͉̼̎́̑͌͗͆̓̕이다.", next: 2 }
     ]
   },
   {
-    question: "Time left until Earth's destruction: ∞",
+    question: "지구멸망까지 남은 시간은 ∞이다.",
     options: [
-      { text: "In a world with humans?", result: "Time left until Earth's destruction: 89 seconds.", next: 0 },
-      { text: "In a world after destruction?", result: "Time left until Earth's destruction: v̵̬͉̬̟̣̩͔͊͗̋̊̇̇̚̚͟ơ̧̭̱̤̟͖̭͎͛͂̍̀͢í̴̧̫̥͙̬̀́̐̾͋̿͑̄̅͢͢d̸̼̙̣͍̪̟̣͉̼̎́̑͌͗͆̓̕", next: 2 }
+      { text: "인간이 있는 세계에선?", result: "지구멸망까지 남은 시간은 89초이다.", next: 0 },
+      { text: "멸망한 후 세계에선?", result: "지구멸망까지 남은 시간은 v̵̬͉̬̟̣̩͔͊͗̋̊̇̇̚̚͟ơ̧̭̱̤̟͖̭͎͛͂̍̀͢í̴̧̫̥͙̬̀́̐̾͋̿͑̄̅͢͢d̸̼̙̣͍̪̟̣͉̼̎́̑͌͗͆̓̕이다.", next: 2 }
     ]
   },
   {
-    question: "Time left until Earth's destruction: ??",
+    question: "지구멸망까지 남은 시간은 ??이다.",
     options: [
-      { text: "In a world with humans?", result: "Time left until Earth's destruction: 89 seconds.", next: 0 },
-      { text: "In a world without humans?", result: "Time left until Earth's destruction: ∞", next: 1 }
+      { text: "인간이 있는 세계에선?", result: "지구멸망까지 남은 시간은 89초이다.", next: 0 },
+      { text: "인간이 없는 세계에선?", result: "지구멸망까지 남은 시간은 ∞이다.", next: 1 }
     ]
   }
 ];
 
 const easterEgg = {
-  question: "Is this really the end?",
+  question: "이것이 정말 끝이 맞을까요?",
   options: [
-    { text: "Repetition is eternal", result: "You are in a loop." },
-    { text: "It's all just coincidence", result: "There is no enlightenment here." }
+    { text: "반복은 영원이야", result: "당신은 순환 속에 있습니다." },
+    { text: "모든 건 우연일 뿐", result: "깨달음은 여기에 없습니다." }
+  ]
 };
+
 
 let current = 0;
 let count = 0;
@@ -133,9 +135,9 @@ function showResult(result, nextIndex, isFromEasterEgg = false) {
 
     count++;
 
-if (count === 15) showMidMessage("What are humans to Earth?");
-if (count === 25) showMidMessage("To humans, Earth is a necessary being.");
-if (count === 30) showMidMessage("What is Earth, really?");
+    if (count === 15) showMidMessage("지구에게 인간은 어떤 존재인가?");
+    if (count === 25) showMidMessage("인간에게 지구는 필요한 존재이다.");
+    if (count === 30) showMidMessage("지구는 과연 어떨까?");
 
     if (isFromEasterEgg) {
       showingEasterEgg = false;
