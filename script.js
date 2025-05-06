@@ -87,12 +87,6 @@ function loadQuestion() {
   });
 }
 
-function handleSelection(selectedOption) {
-  const nextQuestionIndex = selectedOption.next;
-  const resultText = selectedOption.result;
-  showResult(resultText, nextQuestionIndex);
-}
-
 function loadEasterEgg() {
   const q = easterEgg;
   document.getElementById("question-box").innerHTML = `
@@ -157,6 +151,17 @@ function showResult(result, nextIndex, isFromEasterEgg = false) {
   }, delayTime);
 }
 
+let clickSoundEnabled = false;
+
+function playClickSound() {
+  if (!clickSoundEnabled) return;
+  const audio = document.getElementById("click-sound");
+  if (audio) {
+    audio.currentTime = 0;
+    audio.play();
+  }
+}
+
 function triggerAutomatedMode() {
   // 암전
   const blackout = document.getElementById('blackout');
@@ -181,9 +186,9 @@ function autoClickRandomOption() {
   if (options.length === 0) return;
 
   const randomIndex = Math.floor(Math.random() * options.length);
+  playClickSound();
   options[randomIndex].click();
 }
-
 
 // ✅ 중간 메시지 함수는 함수 바깥에 위치해야 함
 function showMidMessage(message) {
