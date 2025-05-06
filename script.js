@@ -158,20 +158,21 @@ function showResult(result, nextIndex, isFromEasterEgg = false) {
 }
 
 function triggerAutomatedMode() {
+  // 암전
   const blackout = document.getElementById('blackout');
   blackout.classList.remove('hide');
 
+  // BGM 멈추기
   document.getElementById('bgm').pause();
-  const machine = document.getElementById('machine-sound');
-  machine.volume = 0.1;
-  machine.play();
 
+  // 클릭 사운드 활성화
+  clickSoundEnabled = true;
+
+  // 암전 후 2초 뒤 화면 축소 및 자동 클릭 시작
   setTimeout(() => {
     blackout.classList.add('hide');
     document.body.classList.add('shrinked-view');
-    
-    isAutoMode = true; // ✅ 자동 모드 시작
-    autoClickRandomOption(); // 자동 클릭 시작
+    autoClickRandomOption();
   }, 2000);
 }
 
