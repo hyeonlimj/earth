@@ -113,7 +113,6 @@ function showResult(result, nextIndex, isFromEasterEgg = false) {
   const box = document.getElementById("question-box");
   const isVoid = result.includes("void") || result.includes("v͊");
 
-  // ✅ glitch 효과를 정확히 void에만 적용
   let displayText = result;
   if (isVoid) {
     displayText = result.replace(/(v͊.*?d̎[^ ]*)/gi, '<span class="glitch" data-text="$1">$1</span>');
@@ -135,12 +134,14 @@ function showResult(result, nextIndex, isFromEasterEgg = false) {
 
     count++;
 
-    if (count === 5) showMidMessage("Has the Earth ever questioned what humans are?");
-    if (count === 10) showMidMessage("Still, humans see the Earth as something they cannot live without.");
-    if (count === 15) showMidMessage("But have they ever truly seen the Earth for what it is?");
-    if (count === 20) {
-  triggerAutomatedMode();
-}
+    if (count === 5) showMidMessage("...");
+    if (count === 10) showMidMessage("...");
+    if (count === 15) showMidMessage("...");
+
+    if (count >= 20 && !autoClickStarted) {
+      autoClickStarted = true;
+      triggerAutomatedMode();
+    }
 
     if (isFromEasterEgg) {
       showingEasterEgg = false;
@@ -156,7 +157,8 @@ function showResult(result, nextIndex, isFromEasterEgg = false) {
       }
     }
   }, delayTime);
-}
+} // ✅ 이 중괄호가 빠져 있었음!!
+
 
 let clickSoundEnabled = false;
 
@@ -187,17 +189,22 @@ function triggerAutomatedMode() {
   }, 2000);
 }
 
+let autoClickStarted = false;
+
 function autoClickLoop() {
-  if (count >= 100) return; // 100회 도달 시 중단
+  if (count >= 100) return;
 
   const options = document.querySelectorAll('#options button');
-  if (options.length === 0) return;
+  if (options.length === 0) {
+    // 버튼이 아직 안 나왔으면 조금 있다 다시 시도
+    setTimeout(autoClickLoop, 500);
+    return;
+  }
 
   const randomIndex = Math.floor(Math.random() * options.length);
   playClickSound();
   options[randomIndex].click();
 
-  // 다음 클릭 예약 (2.5초마다 반복)
   setTimeout(autoClickLoop, 2500);
 }
 
