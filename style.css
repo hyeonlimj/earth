@@ -148,3 +148,8 @@ button:hover {
 .blackout.hide {
   opacity: 0;
 }
+
+body.shrinked-view,
+html.shrinked-view {
+  overflow: hidden;
+}
