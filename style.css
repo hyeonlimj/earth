@@ -125,3 +125,26 @@ button:hover {
 .glitch-effect {
   animation: glitchNoise 0.2s infinite;
 }
+
+/* 📼 화면 축소 및 암전 효과 */
+.shrinked-view {
+  transform: scale(0.5);
+  transform-origin: center center;
+  filter: brightness(0.5) blur(1px);
+  transition: all 1s ease-in-out;
+}
+
+/* 🖤 암전 화면 */
+.blackout {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: black;
+  z-index: 9999;
+  opacity: 1;
+  transition: opacity 1s ease-in-out;
+  pointer-events: none;
+}
+.blackout.hide {
+  opacity: 0;
+}
