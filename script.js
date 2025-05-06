@@ -70,6 +70,13 @@ function toggleCounter() {
   }
 }
 
+function handleSelection(selectedOption) {
+  playClickSound(); // 클릭 사운드 재생
+  const nextQuestionIndex = selectedOption.next;
+  const resultText = selectedOption.result;
+  showResult(resultText, nextQuestionIndex);
+}
+
 function loadQuestion() {
   const q = questions[current];
   document.getElementById("question-box").innerHTML = `
@@ -199,13 +206,6 @@ function showMidMessage(message) {
   setTimeout(() => {
     msgBox.style.opacity = "0";
   }, 3000);
-}
-
-function handleSelection(selectedOption) {
-  playClickSound(); // 클릭 사운드 재생
-  const nextQuestionIndex = selectedOption.next;
-  const resultText = selectedOption.result;
-  showResult(resultText, nextQuestionIndex);
 }
 
 setInterval(toggleCounter, 1000);
