@@ -180,12 +180,14 @@ function triggerAutomatedMode() {
   document.getElementById('bgm').pause();
   clickSoundEnabled = true;
 
-  // 2초 후 화면 축소 및 루프 시작
   setTimeout(() => {
     blackout.classList.add('hide');
     document.body.classList.add('shrinked-view');
 
-    autoClickLoop(); // ✅ 여기서 딱 한 번만 시작!
+    // 💡 여기서 중앙 정렬 클래스 추가
+    document.getElementById('question-box').classList.add('centered');
+
+    autoClickLoop(); // 자동 클릭 시작
   }, 2000);
 }
 
