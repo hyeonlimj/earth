@@ -197,14 +197,7 @@ function showMidMessage(message) {
 }
 
 function handleSelection(selectedOption) {
-  if (isAutoMode) {
-    const clickSound = document.getElementById('click-sound');
-    if (clickSound) {
-      clickSound.currentTime = 0;
-      clickSound.play();
-    }
-  }
-
+  playClickSound(); // 클릭 사운드 재생
   const nextQuestionIndex = selectedOption.next;
   const resultText = selectedOption.result;
   showResult(resultText, nextQuestionIndex);
