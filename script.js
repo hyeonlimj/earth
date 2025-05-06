@@ -169,6 +169,8 @@ function playClickSound() {
   }
 }
 
+let autoClickInterval;
+
 function triggerAutomatedMode() {
   const blackout = document.getElementById('blackout');
   blackout.classList.remove('hide');
@@ -180,10 +182,17 @@ function triggerAutomatedMode() {
     blackout.classList.add('hide');
     document.body.classList.add('shrinked-view');
 
-    // 자동 클릭 반복 시작
-    autoClickLoop();
+    // 자동 클릭을 1초마다 반복 실행
+    autoClickInterval = setInterval(() => {
+      if (count >= 100) {
+        clearInterval(autoClickInterval); // 100번 클릭 후 중단
+        return;
+      }
+      autoClickRandomOption();
+    }, 1000);
   }, 2000);
 }
+
 
 function autoClickLoop() {
   if (count >= 100) return; // ✅ 100회까지 도달 시 중단
