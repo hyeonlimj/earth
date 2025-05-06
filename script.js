@@ -178,24 +178,17 @@ function triggerAutomatedMode() {
   document.getElementById('bgm').pause();
   clickSoundEnabled = true;
 
+  // 2초 후 화면 축소 및 루프 시작
   setTimeout(() => {
     blackout.classList.add('hide');
     document.body.classList.add('shrinked-view');
 
-    // 자동 클릭을 1초마다 반복 실행
-    autoClickInterval = setInterval(() => {
-      if (count >= 100) {
-        clearInterval(autoClickInterval); // 100번 클릭 후 중단
-        return;
-      }
-      autoClickRandomOption();
-    }, 1000);
+    autoClickLoop(); // ✅ 여기서 딱 한 번만 시작!
   }, 2000);
 }
 
-
 function autoClickLoop() {
-  if (count >= 100) return; // ✅ 100회까지 도달 시 중단
+  if (count >= 100) return; // 100회 도달 시 중단
 
   const options = document.querySelectorAll('#options button');
   if (options.length === 0) return;
@@ -204,8 +197,8 @@ function autoClickLoop() {
   playClickSound();
   options[randomIndex].click();
 
-  // 다음 클릭 예약
-  setTimeout(autoClickLoop, 2500); // 간격 조절 가능
+  // 다음 클릭 예약 (2.5초마다 반복)
+  setTimeout(autoClickLoop, 2500);
 }
 
 // ✅ 중간 메시지 함수는 함수 바깥에 위치해야 함
