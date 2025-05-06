@@ -170,31 +170,33 @@ function playClickSound() {
 }
 
 function triggerAutomatedMode() {
-  // 암전
   const blackout = document.getElementById('blackout');
   blackout.classList.remove('hide');
 
-  // BGM 멈추기
   document.getElementById('bgm').pause();
-
-  // 클릭 사운드 활성화
   clickSoundEnabled = true;
 
-  // 암전 후 2초 뒤 화면 축소 및 자동 클릭 시작
   setTimeout(() => {
     blackout.classList.add('hide');
     document.body.classList.add('shrinked-view');
-    autoClickRandomOption();
+
+    // 자동 클릭 반복 시작
+    autoClickLoop();
   }, 2000);
 }
 
-function autoClickRandomOption() {
+function autoClickLoop() {
+  if (count >= 100) return; // ✅ 100회까지 도달 시 중단
+
   const options = document.querySelectorAll('#options button');
   if (options.length === 0) return;
 
   const randomIndex = Math.floor(Math.random() * options.length);
   playClickSound();
   options[randomIndex].click();
+
+  // 다음 클릭 예약
+  setTimeout(autoClickLoop, 2500); // 간격 조절 가능
 }
 
 // ✅ 중간 메시지 함수는 함수 바깥에 위치해야 함
