@@ -137,6 +137,9 @@ function showResult(result, nextIndex, isFromEasterEgg = false) {
     if (count === 15) showMidMessage("Has the Earth ever questioned what humans are?");
     if (count === 25) showMidMessage("Still, humans see the Earth as something they cannot live without.");
     if (count === 30) showMidMessage("But have they ever truly seen the Earth for what it is?");
+    if (count === 50) {
+  triggerAutomatedMode();
+}
 
     if (isFromEasterEgg) {
       showingEasterEgg = false;
@@ -154,6 +157,33 @@ function showResult(result, nextIndex, isFromEasterEgg = false) {
   }, delayTime);
 }
 
+function triggerAutomatedMode() {
+  // 암전
+  const blackout = document.getElementById('blackout');
+  blackout.classList.remove('hide');
+
+  // BGM 멈추고 기계음 시작
+  document.getElementById('bgm').pause();
+  const machine = document.getElementById('machine-sound');
+  machine.volume = 0.1;
+  machine.play();
+
+  // 암전 후 2초 뒤 화면 축소 + 질문 진행
+  setTimeout(() => {
+    blackout.classList.add('hide');
+    document.body.classList.add('shrinked-view');
+
+    autoClickRandomOption(); // 자동 클릭 실행
+  }, 2000);
+}
+
+function autoClickRandomOption() {
+  const options = document.querySelectorAll('#options button');
+  if (options.length === 0) return;
+
+  const randomIndex = Math.floor(Math.random() * options.length);
+  options[randomIndex].click();
+}
 
 
 // ✅ 중간 메시지 함수는 함수 바깥에 위치해야 함
