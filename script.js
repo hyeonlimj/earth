@@ -196,7 +196,6 @@ function autoClickLoop() {
 
   const options = document.querySelectorAll('#options button');
   if (options.length === 0) {
-    // 버튼이 아직 안 나왔으면 조금 있다 다시 시도
     setTimeout(autoClickLoop, 500);
     return;
   }
@@ -205,7 +204,8 @@ function autoClickLoop() {
   playClickSound();
   options[randomIndex].click();
 
-  setTimeout(autoClickLoop, 2500);
+  // ⏱️ 여기 값을 조절하세요 (기본: 2500 → 예: 4000 = 4초)
+  setTimeout(autoClickLoop, 4000);
 }
 
 // ✅ 중간 메시지 함수는 함수 바깥에 위치해야 함
