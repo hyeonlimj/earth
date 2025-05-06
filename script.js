@@ -158,22 +158,20 @@ function showResult(result, nextIndex, isFromEasterEgg = false) {
 }
 
 function triggerAutomatedMode() {
-  // 암전
   const blackout = document.getElementById('blackout');
   blackout.classList.remove('hide');
 
-  // BGM 멈추고 기계음 시작
   document.getElementById('bgm').pause();
   const machine = document.getElementById('machine-sound');
   machine.volume = 0.1;
   machine.play();
 
-  // 암전 후 2초 뒤 화면 축소 + 질문 진행
   setTimeout(() => {
     blackout.classList.add('hide');
     document.body.classList.add('shrinked-view');
-
-    autoClickRandomOption(); // 자동 클릭 실행
+    
+    isAutoMode = true; // ✅ 자동 모드 시작
+    autoClickRandomOption(); // 자동 클릭 시작
   }, 2000);
 }
 
@@ -195,6 +193,20 @@ function showMidMessage(message) {
   setTimeout(() => {
     msgBox.style.opacity = "0";
   }, 3000);
+}
+
+function handleSelection(selectedOption) {
+  if (isAutoMode) {
+    const clickSound = document.getElementById('click-sound');
+    if (clickSound) {
+      clickSound.currentTime = 0;
+      clickSound.play();
+    }
+  }
+
+  const nextQuestionIndex = selectedOption.next;
+  const resultText = selectedOption.result;
+  showResult(resultText, nextQuestionIndex);
 }
 
 setInterval(toggleCounter, 1000);
