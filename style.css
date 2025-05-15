@@ -197,3 +197,9 @@ body.shrinked-view #loop-message {
 .hide {
   display: none;
 }
+
+.fade-out {
+  opacity: 0;
+  filter: blur(3px);
+  transition: opacity 2s ease, filter 2s ease;
+}
