@@ -29,16 +29,13 @@
   <!-- 중간 메시지 박스 -->
   <div id="mid-message"></div>
 
-  <!-- 🎵 음악 버튼 -->
-  <button id="music-btn" onclick="document.getElementById('bgm').play()">▶ 음악 켜기</button>
+<!-- 🎵 음악 버튼 -->
+<button id="music-btn" onclick="document.getElementById('bgm').play()">▶ 음악 켜기</button>
 
-  <div id="blackout" class="blackout hide"></div>
-  
-  <!-- 🧠 스크립트는 맨 마지막에 -->
-  <script src="script.js"></script>
-  
+<div id="blackout" class="blackout hide"></div>
+
 <!-- 트리거 오브젝트 -->
-<div id="trigger-area" style="position: absolute; bottom: 10%; right: 10%; width: 40px; height: 40px; opacity: 0.5;">
+<div id="trigger-area" style="position: absolute; bottom: 10%; right: 10%; width: 40px; height: 40px; opacity: 0.5; display: none;">
   <img src="chimp-icon.png" style="width: 100%; height: 100%;">
 </div>
 
@@ -61,6 +58,7 @@
 <div id="loop-message" class="hide">
   <p id="loop-text" style="transition: opacity 1s ease; text-align: center; color: white; font-size: 1.5rem;"></p>
 </div>
-</body>
 
-</html>
+<!-- 🧠 스크립트는 맨 마지막에 -->
+<script src="script.js"></script>
+</body>
