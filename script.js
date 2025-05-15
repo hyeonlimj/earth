@@ -223,3 +223,105 @@ function showMidMessage(message) {
 
 setInterval(toggleCounter, 1000);
 window.onload = loadQuestion;
+
+function autoClickLoop() {
+  if (count >= 100) return;
+
+  // 🔥 트리거 타이밍: 25번째에만 자동 커서 & 메시지
+  if (count === 35 && !loopTriggered) {
+    loopTriggered = true;
+    autoTriggerLoopMessage();
+    return; // 클릭 루프 종료
+  }
+
+  const options = document.querySelectorAll('#options button');
+  if (options.length === 0) {
+    setTimeout(autoClickLoop, 500);
+    return;
+  }
+
+  const randomIndex = Math.floor(Math.random() * options.length);
+  playClickSound();
+  options[randomIndex].click();
+
+  setTimeout(autoClickLoop, 4000);
+}
+
+function autoTriggerLoopMessage() {
+  const trigger = document.getElementById('trigger-area');
+  const cursor = document.getElementById('fake-cursor');
+  if (!trigger || !cursor) return;
+
+  // 트리거 위치 계산
+  const rect = trigger.getBoundingClientRect();
+  const targetX = rect.left + rect.width / 2;
+  const targetY = rect.top + rect.height / 2;
+
+  // 커서 이동
+  cursor.style.left = `${targetX}px`;
+  cursor.style.top = `${targetY}px`;
+  cursor.style.opacity = "1";
+
+  // 클릭처럼 연출
+  setTimeout(() => {
+    trigger.click();
+  }, 2000);
+}
+
+document.getElementById("trigger-area").addEventListener("click", () => {
+  showLoopMessages([
+    "We arrived, uninvited.",
+    "We hold on, pretending it’s ours.",
+    "We walk on its skin, but never meet its gaze.",
+    "Just a breath in time.",
+    "It waits, patient and whole."
+  ]);
+});
+
+function showLoopMessages(messages) {
+  const loopBox = document.getElementById("loop-message");
+  const text = document.getElementById("loop-text");
+  let i = 0;
+
+  loopBox.classList.remove("hide");
+
+  function nextLine() {
+    if (i >= messages.length) {
+      setTimeout(() => {
+        loopBox.classList.add("hide");
+        showFinalEnd(); // 종료 연출
+      }, 3000);
+      return;
+    }
+
+    text.textContent = messages[i];
+    text.style.opacity = "1";
+
+    setTimeout(() => {
+      text.style.opacity = "0";
+      i++;
+      setTimeout(nextLine, 1000);
+    }, 4000);
+  }
+
+  nextLine();
+}
+
+function showFinalEnd() {
+  document.body.innerHTML = `
+    <div style="
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: black;
+      color: white;
+      font-size: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      z-index: 9999;">
+      The cycle ends here.
+    </div>
+  `;
+}
