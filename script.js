@@ -245,16 +245,20 @@ function autoTriggerLoopMessage() {
   const targetX = rect.left + rect.width / 2;
   const targetY = rect.top + rect.height / 2;
 
-  // 커서 이동
-  cursor.style.left = `${targetX}px`;
-  cursor.style.top = `${targetY}px`;
+  // 커서 표시
   cursor.style.opacity = "1";
 
-  // 클릭처럼 연출 후 사라짐
+  // 다음 프레임에서 위치 이동 (애니메이션 자연스럽게)
+  requestAnimationFrame(() => {
+    cursor.style.left = `${targetX}px`;
+    cursor.style.top = `${targetY}px`;
+  });
+
+  // 클릭처럼 연출 후 커서 사라짐
   setTimeout(() => {
     trigger.click();
-    cursor.style.opacity = "0"; // 클릭 후 커서 사라짐
-  }, 2000);
+    cursor.style.opacity = "0";
+  }, 2000); // 커서 도착 후 2초 뒤 클릭
 }
 
 document.getElementById("trigger-area").addEventListener("click", () => {
