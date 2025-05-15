@@ -140,7 +140,17 @@ function showResult(result, nextIndex, isFromEasterEgg = false) {
       autoClickStarted = true;
       triggerAutomatedMode();
     }
+    if (count === 35 && !loopTriggered) {
+      loopTriggered = true;
 
+      showLoopMessages([
+        "We arrived, uninvited.",
+        "We hold on, pretending it’s ours.",
+        "We walk on its skin, but never meet its gaze.",
+        "Just a breath in time.",
+        "It waits, patient and whole."
+      ]);
+    }
     if (isFromEasterEgg) {
       showingEasterEgg = false;
       current = nextIndex;
@@ -212,16 +222,6 @@ function showMidMessage(message) {
 
 setInterval(toggleCounter, 1000);
 window.onload = loadQuestion;
-
-document.getElementById("trigger-area").addEventListener("click", () => {
-  showLoopMessages([
-    "We arrived, uninvited.",
-    "We hold on, pretending it’s ours.",
-    "We walk on its skin, but never meet its gaze.",
-    "Just a breath in time.",
-    "It waits, patient and whole."
-  ]);
-});
 
 function showFinalEnd() {
   document.body.innerHTML = `
