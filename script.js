@@ -246,9 +246,13 @@ function showFinalEnd() {
 function showLoopMessages(messages) {
   const loopBox = document.getElementById("loop-message");
   const text = document.getElementById("loop-text");
+  const questionBox = document.getElementById("question-box");
 
-  // ✅ 나레이션 상자 위로 이동 + 확대
-  loopBox.style.top = "5%"; // 기존 20%보다 위로
+  // ✅ 부드럽게 흐릿해지게
+  questionBox.classList.add("fade-out");
+
+  // ✅ loop-message 위치 조정
+  loopBox.style.top = "5%";
   loopBox.style.transform = "translate(-50%, 0)";
   loopBox.style.scale = "1.5";
 
@@ -276,4 +280,3 @@ function showLoopMessages(messages) {
 
   nextLine();
 }
-
