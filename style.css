@@ -194,28 +194,6 @@ body.shrinked-view #loop-message {
   z-index: 10000;
 }
 
-.modal-content {
-  background: black;
-  border: 1px solid white;
-  padding: 30px 40px;
-  text-align: center;
-  max-width: 80%;
-  color: white;
-  font-size: 1.8rem;
-  font-family: 'Courier New', monospace;
-  line-height: 1.6;
-}
-
-.modal button {
-  margin-top: 30px;
-  font-size: 1.2rem;
-  padding: 10px 20px;
-  background: none;
-  border: 1px solid white;
-  color: white;
-  cursor: pointer;
-}
-
 .hide {
   display: none;
 }
