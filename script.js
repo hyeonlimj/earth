@@ -213,26 +213,15 @@ function showMidMessage(message) {
 setInterval(toggleCounter, 1000);
 window.onload = loadQuestion;
 
-// 모달 사용 시 필요한 함수 (수동 호출 가능)
-function showLoopModal(messages) {
-  const modal = document.getElementById("loop-modal");
-  const text = document.getElementById("loop-modal-text");
-  const nextBtn = document.getElementById("modal-next-btn");
-
-  let i = 0;
-  modal.classList.remove("hide");
-  text.textContent = messages[i];
-
-  nextBtn.onclick = () => {
-    i++;
-    if (i < messages.length) {
-      text.textContent = messages[i];
-    } else {
-      modal.classList.add("hide");
-      showFinalEnd();
-    }
-  };
-}
+document.getElementById("trigger-area").addEventListener("click", () => {
+  showLoopMessages([
+    "We arrived, uninvited.",
+    "We hold on, pretending it’s ours.",
+    "We walk on its skin, but never meet its gaze.",
+    "Just a breath in time.",
+    "It waits, patient and whole."
+  ]);
+});
 
 function showFinalEnd() {
   document.body.innerHTML = `
