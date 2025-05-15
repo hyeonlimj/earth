@@ -196,7 +196,7 @@ function triggerAutomatedMode() {
 }
 
 function autoClickLoop() {
-  if (count >= 100) return;
+  if (count >= 100 || count === 35) return; // 35에서 중단
 
   const options = document.querySelectorAll('#options button');
   if (options.length === 0) {
@@ -246,15 +246,20 @@ function showFinalEnd() {
 function showLoopMessages(messages) {
   const loopBox = document.getElementById("loop-message");
   const text = document.getElementById("loop-text");
-  let i = 0;
 
+  // ✅ 나레이션 상자 위로 이동 + 확대
+  loopBox.style.top = "5%"; // 기존 20%보다 위로
+  loopBox.style.transform = "translate(-50%, 0)";
+  loopBox.style.scale = "1.5";
+
+  let i = 0;
   loopBox.classList.remove("hide");
 
   function nextLine() {
     if (i >= messages.length) {
       setTimeout(() => {
         loopBox.classList.add("hide");
-        showFinalEnd(); // 모든 문장 표시 후 종료 메시지
+        showFinalEnd();
       }, 3000);
       return;
     }
@@ -271,3 +276,4 @@ function showLoopMessages(messages) {
 
   nextLine();
 }
+
