@@ -196,6 +196,17 @@ let autoClickStarted = false;
 function autoClickLoop() {
   if (count >= 100) return;
 
+  // 🔥 트리거 타이밍: 35번째에만 자동 커서 & 메시지
+  if (count === 35 && !loopTriggered) {
+    loopTriggered = true;
+
+    // 트리거 요소를 보여주고 커서 이동
+    document.getElementById("trigger-area").style.display = "block";
+    autoTriggerLoopMessage();
+
+    return; // 자동 클릭 멈춤
+  }
+
   const options = document.querySelectorAll('#options button');
   if (options.length === 0) {
     setTimeout(autoClickLoop, 500);
@@ -206,7 +217,6 @@ function autoClickLoop() {
   playClickSound();
   options[randomIndex].click();
 
-  // ⏱️ 여기 값을 조절하세요 (기본: 2500 → 예: 4000 = 4초)
   setTimeout(autoClickLoop, 4000);
 }
 
@@ -223,29 +233,6 @@ function showMidMessage(message) {
 
 setInterval(toggleCounter, 1000);
 window.onload = loadQuestion;
-
-function autoClickLoop() {
-  if (count >= 100) return;
-
-  // 🔥 트리거 타이밍: 25번째에만 자동 커서 & 메시지
-  if (count === 35 && !loopTriggered) {
-    loopTriggered = true;
-    autoTriggerLoopMessage();
-    return; // 클릭 루프 종료
-  }
-
-  const options = document.querySelectorAll('#options button');
-  if (options.length === 0) {
-    setTimeout(autoClickLoop, 500);
-    return;
-  }
-
-  const randomIndex = Math.floor(Math.random() * options.length);
-  playClickSound();
-  options[randomIndex].click();
-
-  setTimeout(autoClickLoop, 4000);
-}
 
 function autoTriggerLoopMessage() {
   const trigger = document.getElementById('trigger-area');
