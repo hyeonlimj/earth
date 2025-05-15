@@ -159,6 +159,12 @@ html.shrinked-view {
   transform: translate(-50%, -50%) !important;
 }
 
+#trigger-area {
+  border: 2px dashed white;
+  border-radius: 50%;
+  box-shadow: 0 0 10px white;
+}
+
 #loop-message {
   position: fixed;
   top: 20%; /* 중앙보다 위로! 기존 50%에서 20%로 */
