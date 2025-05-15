@@ -71,7 +71,7 @@ function toggleCounter() {
 }
 
 function handleSelection(selectedOption) {
-  playClickSound(); // 클릭 사운드 재생
+  playClickSound();
   const nextQuestionIndex = selectedOption.next;
   const resultText = selectedOption.result;
   showResult(resultText, nextQuestionIndex);
@@ -128,9 +128,7 @@ function showResult(result, nextIndex, isFromEasterEgg = false) {
   const delayTime = isFromEasterEgg ? 4000 : 2000;
 
   setTimeout(() => {
-    if (isVoid) {
-      document.body.classList.remove("glitch-effect");
-    }
+    if (isVoid) document.body.classList.remove("glitch-effect");
 
     count++;
 
@@ -157,8 +155,7 @@ function showResult(result, nextIndex, isFromEasterEgg = false) {
       }
     }
   }, delayTime);
-} // ✅ 이 중괄호가 빠져 있었음!!
-
+}
 
 let clickSoundEnabled = false;
 
@@ -171,42 +168,24 @@ function playClickSound() {
   }
 }
 
-let autoClickInterval;
+let autoClickStarted = false;
 
 function triggerAutomatedMode() {
   const blackout = document.getElementById('blackout');
   blackout.classList.remove('hide');
-
   document.getElementById('bgm').pause();
   clickSoundEnabled = true;
 
   setTimeout(() => {
     blackout.classList.add('hide');
     document.body.classList.add('shrinked-view');
-
-    // 💡 여기서 중앙 정렬 클래스 추가
     document.getElementById('question-box').classList.add('centered');
-
-    autoClickLoop(); // 자동 클릭 시작
+    autoClickLoop();
   }, 2000);
 }
 
-let autoClickStarted = false;
-let loopTriggered = false;
-
 function autoClickLoop() {
   if (count >= 100) return;
-
-  // 🔥 트리거 타이밍: 35번째에만 자동 커서 & 메시지
-  if (count === 35 && !loopTriggered) {
-    loopTriggered = true;
-
-    // 트리거 요소를 보여주고 커서 이동
-    document.getElementById("trigger-area").style.display = "block";
-    autoTriggerLoopMessage();
-
-    return; // 자동 클릭 멈춤
-  }
 
   const options = document.querySelectorAll('#options button');
   if (options.length === 0) {
@@ -221,7 +200,6 @@ function autoClickLoop() {
   setTimeout(autoClickLoop, 4000);
 }
 
-// ✅ 중간 메시지 함수는 함수 바깥에 위치해야 함
 function showMidMessage(message) {
   const msgBox = document.getElementById("mid-message");
   msgBox.textContent = message;
@@ -235,42 +213,7 @@ function showMidMessage(message) {
 setInterval(toggleCounter, 1000);
 window.onload = loadQuestion;
 
-function autoTriggerLoopMessage() {
-  const trigger = document.getElementById('trigger-area');
-  const cursor = document.getElementById('fake-cursor');
-  if (!trigger || !cursor) return;
-
-  // 트리거 위치 계산
-  const rect = trigger.getBoundingClientRect();
-  const targetX = rect.left + rect.width / 2;
-  const targetY = rect.top + rect.height / 2;
-
-  // 커서 표시
-  cursor.style.opacity = "1";
-
-  // 다음 프레임에서 위치 이동 (애니메이션 자연스럽게)
-  requestAnimationFrame(() => {
-    cursor.style.left = `${targetX}px`;
-    cursor.style.top = `${targetY}px`;
-  });
-
-  // 클릭처럼 연출 후 커서 사라짐
-  setTimeout(() => {
-    trigger.click();
-    cursor.style.opacity = "0";
-  }, 2000); // 커서 도착 후 2초 뒤 클릭
-}
-
-document.getElementById("trigger-area").addEventListener("click", () => {
-  showLoopModal([
-    "We arrived, uninvited.",
-    "We hold on, pretending it’s ours.",
-    "We walk on its skin, but never meet its gaze.",
-    "Just a breath in time.",
-    "It waits, patient and whole."
-  ]);
-});
-
+// 모달 사용 시 필요한 함수 (수동 호출 가능)
 function showLoopModal(messages) {
   const modal = document.getElementById("loop-modal");
   const text = document.getElementById("loop-modal-text");
@@ -286,38 +229,9 @@ function showLoopModal(messages) {
       text.textContent = messages[i];
     } else {
       modal.classList.add("hide");
-      showFinalEnd(); // 끝나면 마지막 연출로 넘어가요.
+      showFinalEnd();
     }
   };
-}
-
-function showLoopMessages(messages) {
-  const loopBox = document.getElementById("loop-message");
-  const text = document.getElementById("loop-text");
-  let i = 0;
-
-  loopBox.classList.remove("hide");
-
-  function nextLine() {
-    if (i >= messages.length) {
-      setTimeout(() => {
-        loopBox.classList.add("hide");
-        showFinalEnd(); // 종료 연출
-      }, 3000);
-      return;
-    }
-
-    text.textContent = messages[i];
-    text.style.opacity = "1";
-
-    setTimeout(() => {
-      text.style.opacity = "0";
-      i++;
-      setTimeout(nextLine, 1000);
-    }, 4000);
-  }
-
-  nextLine();
 }
 
 function showFinalEnd() {
