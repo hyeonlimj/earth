@@ -168,6 +168,7 @@ function showResult(result, nextIndex, isFromEasterEgg = false) {
 }
 
 let clickSoundEnabled = false;
+let loopTriggered = false;
 
 function playClickSound() {
   if (!clickSoundEnabled) return;
@@ -240,4 +241,33 @@ function showFinalEnd() {
       The cycle ends here.
     </div>
   `;
+}
+
+function showLoopMessages(messages) {
+  const loopBox = document.getElementById("loop-message");
+  const text = document.getElementById("loop-text");
+  let i = 0;
+
+  loopBox.classList.remove("hide");
+
+  function nextLine() {
+    if (i >= messages.length) {
+      setTimeout(() => {
+        loopBox.classList.add("hide");
+        showFinalEnd(); // 모든 문장 표시 후 종료 메시지
+      }, 3000);
+      return;
+    }
+
+    text.textContent = messages[i];
+    text.style.opacity = "1";
+
+    setTimeout(() => {
+      text.style.opacity = "0";
+      i++;
+      setTimeout(nextLine, 1000);
+    }, 4000);
+  }
+
+  nextLine();
 }
