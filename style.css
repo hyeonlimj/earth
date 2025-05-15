@@ -159,6 +159,18 @@ html.shrinked-view {
   transform: translate(-50%, -50%) !important;
 }
 
+#fake-cursor {
+  width: 40px;
+  height: 40px;
+}
+
+#trigger-area:hover {
+  opacity: 1;
+  transform: scale(1.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
 #trigger-area {
   border: 2px dashed white;
   border-radius: 50%;
