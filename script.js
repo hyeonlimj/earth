@@ -192,6 +192,7 @@ function triggerAutomatedMode() {
 }
 
 let autoClickStarted = false;
+let loopTriggered = false;
 
 function autoClickLoop() {
   if (count >= 100) return;
@@ -249,9 +250,10 @@ function autoTriggerLoopMessage() {
   cursor.style.top = `${targetY}px`;
   cursor.style.opacity = "1";
 
-  // 클릭처럼 연출
+  // 클릭처럼 연출 후 사라짐
   setTimeout(() => {
     trigger.click();
+    cursor.style.opacity = "0"; // 클릭 후 커서 사라짐
   }, 2000);
 }
 
