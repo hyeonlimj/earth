@@ -174,8 +174,10 @@ body.shrinked-view #loop-message {
 }
 
 #loop-text {
+  top: 5%;
+  left: 50%;
   color: white;
-  font-size: 3.5rem;         /* 🔥 더 큼직하게 */
+  font-size: 5.5rem;         /* 🔥 더 큼직하게 */
   font-weight: bold;         /* 🔥 굵게 */
   text-shadow: 2px 2px 6px black;  /* 🔥 뚜렷하게 */
   letter-spacing: 2px;
