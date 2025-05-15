@@ -161,11 +161,16 @@ html.shrinked-view {
 
 #loop-message {
   position: fixed;
-  top: 20%; /* 중앙보다 위로! 기존 50%에서 20%로 */
+  top: 20%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 9999;
+  z-index: 10001; /* shrinked-view 위에 위치하도록 더 크게 */
   pointer-events: none;
+  transform-origin: center center;
+}
+
+body.shrinked-view #loop-message {
+  transform: scale(2) translate(-50%, -50%);
 }
 
 #loop-text {
