@@ -262,7 +262,7 @@ function autoTriggerLoopMessage() {
 }
 
 document.getElementById("trigger-area").addEventListener("click", () => {
-  showLoopMessages([
+  showLoopModal([
     "We arrived, uninvited.",
     "We hold on, pretending it’s ours.",
     "We walk on its skin, but never meet its gaze.",
@@ -270,6 +270,26 @@ document.getElementById("trigger-area").addEventListener("click", () => {
     "It waits, patient and whole."
   ]);
 });
+
+function showLoopModal(messages) {
+  const modal = document.getElementById("loop-modal");
+  const text = document.getElementById("loop-modal-text");
+  const nextBtn = document.getElementById("modal-next-btn");
+
+  let i = 0;
+  modal.classList.remove("hide");
+  text.textContent = messages[i];
+
+  nextBtn.onclick = () => {
+    i++;
+    if (i < messages.length) {
+      text.textContent = messages[i];
+    } else {
+      modal.classList.add("hide");
+      showFinalEnd(); // 끝나면 마지막 연출로 넘어가요.
+    }
+  };
+}
 
 function showLoopMessages(messages) {
   const loopBox = document.getElementById("loop-message");
