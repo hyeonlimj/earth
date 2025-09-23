@@ -25,6 +25,7 @@ button:hover {
   position: absolute;
   top: 50%;
   left: 50%;
+  transform: translate(-50%, -50%);
   width: auto;
   display: flex;
   flex-direction: column;
@@ -127,7 +128,7 @@ button:hover {
 /* 📼 화면 축소 및 암전 효과 */
 .shrinked-view {
   /* scale을 0.5에서 0.35 정도로 줄여서 더 작게 만듭니다. */
-  transform: scale(0.35, 0.35); 
+  transform: scale(0.35);
   /* 가로 세로를 다르게 줄이려면 transform: scale(0.5, 0.2); 와 같이 사용 */
   transform-origin: center center;
   filter: brightness(0.5) blur(1px);
