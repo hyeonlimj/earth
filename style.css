@@ -1,210 +1,210 @@
 body {
-  background-color: black;
-  color: white;
-  font-family: 'Courier New', monospace;
-  text-align: center;
-  margin-top: 30%; /* 20% → 30% */
-  font-size: 24px; /* 기본 글자 크기 추가 */
+  background-color: black;
+  color: white;
+  font-family: 'Courier New', monospace;
+  text-align: center;
+  margin-top: 30%; /* 20% → 30% */
+  font-size: 24px; /* 기본 글자 크기 추가 */
 }
 
 button {
-  margin: 15px; /* 10px → 15px */
-  padding: 15px 25px; /* 10px 20px → 15px 30px */
-  background-color: black;
-  border: 1px solid white;
-  color: white;
-  font-size: 21px; /* 16px → 24px */
-  cursor: pointer;
+  margin: 15px; /* 10px → 15px */
+  padding: 15px 25px; /* 10px 20px → 15px 30px */
+  background-color: black;
+  border: 1px solid white;
+  color: white;
+  font-size: 21px; /* 16px → 24px */
+  cursor: pointer;
 }
 
 button:hover {
-  background-color: white;
-  color: black;
+  background-color: white;
+  color: black;
 }
 
 #question-box {
-  position: absolute;
-  top: 30%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  background: none; /* ✅ 배경 제거 */
-  padding: 0;        /* ✅ 여백 제거 */
-  border-radius: 0;  /* ✅ 테두리 둥글기 제거 */
-  box-shadow: none;  /* ✅ 그림자 제거 */
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  background: none; /* ✅ 배경 제거 */
+  padding: 0;        /* ✅ 여백 제거 */
+  border-radius: 0;  /* ✅ 테두리 둥글기 제거 */
+  box-shadow: none;  /* ✅ 그림자 제거 */
 }
 
 #question-box p,
 .glitch {
-  font-size: 26px;
-  line-height: 1.6;
-  margin-bottom: 15px;
+  font-size: 26px;
+  line-height: 1.6;
+  margin-bottom: 15px;
 }
 
 #options {
-  display: flex;
-  gap: 20px; /* 버튼 사이 간격 */
-  flex-wrap: wrap; /* 너무 좁으면 줄바꿈 */
-  justify-content: center;
+  display: flex;
+  gap: 20px; /* 버튼 사이 간격 */
+  flex-wrap: wrap; /* 너무 좁으면 줄바꿈 */
+  justify-content: center;
 }
 
 #music-btn {
-  position: fixed;
-  bottom: 10px;
-  right: 10px;
-  font-size: 18px; /* 12px → 18px */
-  padding: 8px 15px; /* 5px 10px → 8px 15px */
-  opacity: 0.6;
-  background: none;
-  border: 1px solid white;
-  color: white;
-  cursor: pointer;
-  z-index: 1000;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  font-size: 18px; /* 12px → 18px */
+  padding: 8px 15px; /* 5px 10px → 8px 15px */
+  opacity: 0.6;
+  background: none;
+  border: 1px solid white;
+  color: white;
+  cursor: pointer;
+  z-index: 1000;
 }
 
 #music-btn:hover {
-  opacity: 1;
-  background: white;
-  color: black;
+  opacity: 1;
+  background: white;
+  color: black;
 }
 
 #count-display {
-  font-size: 36px; /* 24px → 36px */
-  margin-bottom: 15px;
-  letter-spacing: 3px; /* 2px → 3px */
-  font-family: 'Courier New', monospace;
-  visibility: hidden;
+  font-size: 36px; /* 24px → 36px */
+  margin-bottom: 15px;
+  letter-spacing: 3px; /* 2px → 3px */
+  font-family: 'Courier New', monospace;
+  visibility: hidden;
 }
 
-
 @keyframes shake {
-  0% { transform: translate(0, 0); }
-  25% { transform: translate(-1px, 1px); }
-  50% { transform: translate(1px, -1px); }
-  75% { transform: translate(-1px, 0); }
-  100% { transform: translate(0, 0); }
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-1px, 1px); }
+  50% { transform: translate(1px, -1px); }
+  75% { transform: translate(-1px, 0); }
+  100% { transform: translate(0, 0); }
 }
 
 #bg-video {
-  position: fixed;
-  top: 0;
-  left: 0;
-  min-width: 100%;
-  min-height: 100%;
-  object-fit: cover;
-  z-index: -1;
-  opacity: 0.2;
-  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  opacity: 0.2;
+  pointer-events: none;
 }
 
 #mid-message {
-  position: fixed;
-  top: 60%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: gray;
-  font-size: 30px; /* 20px → 30px */
-  opacity: 0;
-  transition: opacity 0.5s ease;
-  z-index: 1000;
-  pointer-events: none;
+  position: fixed;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: gray;
+  font-size: 30px; /* 20px → 30px */
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: 1000;
+  pointer-events: none;
 }
 
 @keyframes glitchNoise {
-  0% { filter: contrast(1) brightness(1); transform: translate(0, 0); }
-  20% { filter: contrast(1.5) brightness(1.2); transform: translate(-2px, 1px); }
-  40% { filter: contrast(0.8) brightness(0.8); transform: translate(2px, -2px); }
-  60% { filter: contrast(1.2) brightness(1.5); transform: translate(-1px, 2px); }
-  80% { filter: contrast(1) brightness(1); transform: translate(1px, -1px); }
-  100% { filter: contrast(1) brightness(1); transform: translate(0, 0); }
+  0% { filter: contrast(1) brightness(1); transform: translate(0, 0); }
+  20% { filter: contrast(1.5) brightness(1.2); transform: translate(-2px, 1px); }
+  40% { filter: contrast(0.8) brightness(0.8); transform: translate(2px, -2px); }
+  60% { filter: contrast(1.2) brightness(1.5); transform: translate(-1px, 2px); }
+  80% { filter: contrast(1) brightness(1); transform: translate(1px, -1px); }
+  100% { filter: contrast(1) brightness(1); transform: translate(0, 0); }
 }
 
 .glitch-effect {
-  animation: glitchNoise 0.2s infinite;
+  animation: glitchNoise 0.2s infinite;
 }
 
 /* 📼 화면 축소 및 암전 효과 */
 .shrinked-view {
-  transform: scale(0.5);
-  transform-origin: center center;
-  filter: brightness(0.5) blur(1px);
-  transition: all 1s ease-in-out;
+  transform: scale(0.5);
+  transform-origin: center center;
+  filter: brightness(0.5) blur(1px);
+  transition: all 1s ease-in-out;
 }
 
 /* 🖤 암전 화면 */
 .blackout {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw; height: 100vh;
-  background: black;
-  z-index: 9999;
-  opacity: 1;
-  transition: opacity 1s ease-in-out;
-  pointer-events: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: black;
+  z-index: 9999;
+  opacity: 1;
+  transition: opacity 1s ease-in-out;
+  pointer-events: none;
 }
-
 .blackout.hide {
-  opacity: 0;
+  opacity: 0;
 }
 
 body.shrinked-view,
 html.shrinked-view {
-  overflow: hidden;
+  overflow: hidden;
 }
 
 .centered {
   top: 50% !important;
+  left: 50% !important; /* 이 부분을 추가하세요 */
   transform: translate(-50%, -50%) !important;
 }
 
 #loop-message {
-  position: fixed;
-  top: 20%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 10001; /* shrinked-view 위에 위치하도록 더 크게 */
-  pointer-events: none;
-  transform-origin: center center;
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10001; /* shrinked-view 위에 위치하도록 더 크게 */
+  pointer-events: none;
+  transform-origin: center center;
 }
 
 body.shrinked-view #loop-message {
-  transform: scale(2) translate(-50%, -50%);
+  transform: scale(2) translate(-50%, -50%);
 }
 
 #loop-text {
-  top: 5%;
-  left: 50%;
-  color: white;
-  font-size: 5.5rem;         /* 🔥 더 큼직하게 */
-  font-weight: bold;         /* 🔥 굵게 */
-  text-shadow: 2px 2px 6px black;  /* 🔥 뚜렷하게 */
-  letter-spacing: 2px;
-  text-align: center;
-  transition: opacity 1s ease;
-  opacity: 0;
+  top: 5%;
+  left: 50%;
+  color: white;
+  font-size: 5.5rem;         /* 🔥 더 큼직하게 */
+  font-weight: bold;         /* 🔥 굵게 */
+  text-shadow: 2px 2px 6px black;  /* 🔥 뚜렷하게 */
+  letter-spacing: 2px;
+  text-align: center;
+  transition: opacity 1s ease;
+  opacity: 0;
 }
 
+
 .modal {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw; height: 100vh;
-  background: rgba(0, 0, 0, 0.85);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 10000;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
 }
 
 .hide {
-  display: none;
+  display: none;
 }
 
 .fade-out {
-  opacity: 0;
-  filter: blur(3px);
-  transition: opacity 2s ease, filter 2s ease;
+  opacity: 0;
+  filter: blur(3px);
+  transition: opacity 2s ease, filter 2s ease;
 }
