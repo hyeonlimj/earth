@@ -136,7 +136,7 @@ function showResult(result, nextIndex, isFromEasterEgg = false) {
 
     if (count === 15) showMidMessage("Has the Earth ever questioned what humans are?");
     if (count === 20) showMidMessage("Still, humans see the Earth as something they cannot live without.");
-    if (count === 55) showMidMessage("But have they ever truly seen the Earth for what it is?");
+    if (count === 30) showMidMessage("But have they ever truly seen the Earth for what it is?");
 
     if (count >= 20 && !autoClickStarted) {
       autoClickStarted = true;
