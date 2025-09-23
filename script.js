@@ -181,6 +181,20 @@ function playClickSound() {
 
 let autoClickStarted = false;
 
+function triggerAutomatedMode() {
+  const blackout = document.getElementById('blackout');
+  blackout.classList.remove('hide');
+  document.getElementById('bgm').pause();
+  clickSoundEnabled = true;
+
+  setTimeout(() => {
+    blackout.classList.add('hide');
+    document.body.classList.add('shrinked-view');
+    // document.getElementById('question-box').classList.add('centered'); // ⚠️ 이 줄을 삭제하세요.
+    autoClickLoop();
+  }, 2000);
+}
+
 function autoClickLoop() {
   if (count >= 100 || count === 35) return; // 35에서 중단
 
