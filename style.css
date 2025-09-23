@@ -3,7 +3,6 @@ body {
   color: white;
   font-family: 'Courier New', monospace;
   text-align: center;
-  margin-top: 30%; /* 20% → 30% */
   font-size: 24px; /* 기본 글자 크기 추가 */
 }
 
@@ -24,9 +23,9 @@ button:hover {
 
 #question-box {
   position: absolute;
-  top: 30%;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 50%; /* 30% -> 50%로 변경 */
+  left: 50%; /* 추가 */
+  transform: translate(-50%, -50%); /* translateX -> translate로 변경 */
   width: auto;
   display: flex;
   flex-direction: column;
