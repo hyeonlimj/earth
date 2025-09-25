@@ -1,33 +1,33 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <title>지구멸망</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>지구멸망</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- 🎥 배경 영상은 가장 먼저 -->
-  <video autoplay muted loop id="bg-video">
-    <source src="https://i.imgur.com/l6iasXA.mp4" type="video/mp4">
-  </video>
+  <!-- 🎥 배경 영상은 가장 먼저 -->
+  <video autoplay muted loop id="bg-video">
+    <source src="https://i.imgur.com/l6iasXA.mp4" type="video/mp4">
+  </video>
 
-  <!-- 🔊 배경 음악 -->
-  <audio id="bgm" loop>
-    <source src="bgm.wav.wav" type="audio/wav">
-  </audio>
+  <!-- 🔊 배경 음악 -->
+  <audio id="bgm" loop>
+    <source src="bgm.wav.wav" type="audio/wav">
+  </audio>
 
-  <audio id="click-sound" src="click.wav" preload="auto"></audio>
+  <audio id="click-sound" src="click.wav" preload="auto"></audio>
 
-  <!-- 📺 질문 / 타이머 -->
-<div id="count-display">00:00:89</div>
+  <!-- 📺 질문 / 타이머 -->
 <div id="question-box">
-  <p id="question">불러오는 중...</p>
-  <div id="options"></div>
+  <div id="count-display">00:00:89</div>
+  <p id="question">불러오는 중...</p>
+  <div id="options"></div>
 </div>
 
-  <!-- 중간 메시지 박스 -->
-  <div id="mid-message"></div>
+  <!-- 중간 메시지 박스 -->
+  <div id="mid-message"></div>
 
 <!-- 🎵 음악 버튼 -->
 <button id="music-btn" onclick="document.getElementById('bgm').play()">▶ 음악 켜기</button>
@@ -36,7 +36,7 @@
 
 <!-- 나레이션 레이어 -->
 <div id="loop-message" class="hide">
-  <p id="loop-text" style="transition: opacity 1s ease; text-align: center; color: white; font-size: 1.5rem;"></p>
+  <p id="loop-text" style="transition: opacity 1s ease; text-align: center; color: white; font-size: 1.5rem;"></p>
 </div>
 
 <!-- 🧠 스크립트는 맨 마지막에 -->
