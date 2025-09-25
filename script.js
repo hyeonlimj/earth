@@ -79,64 +79,64 @@ function handleSelection(selectedOption) {
 
 function loadQuestion() {
   const q = questions[current];
-  document.getElementById("question-box").innerHTML = `
-    <p id="question">${q.question}</p>
-    <div id="options"></div>
-  `;
+
+  // 🔧 박스 전체를 덮어쓰지 말고 각 요소만 갱신
+  const qEl = document.getElementById("question");
+  const optBox = document.getElementById("options");
+
+  qEl.textContent = q.question;
+  optBox.innerHTML = "";
+
   updateTimerDisplay(q.question);
 
-  const optionBox = document.getElementById("options");
   q.options.forEach(opt => {
     const btn = document.createElement("button");
     btn.textContent = opt.text;
     btn.onclick = () => handleSelection(opt);
-    optionBox.appendChild(btn);
+    optBox.appendChild(btn);
   });
 }
 
 function loadEasterEgg() {
   const q = easterEgg;
-  document.getElementById("question-box").innerHTML = `
-    <p id="question">${q.question}</p>
-    <div id="options"></div>
-  `;
-  const optionBox = document.getElementById("options");
+  const qEl = document.getElementById("question");
+  const optBox = document.getElementById("options");
+
+  qEl.textContent = q.question;
+  optBox.innerHTML = "";
+
   q.options.forEach(opt => {
     const btn = document.createElement("button");
     btn.textContent = opt.text;
     btn.onclick = () => showResult(opt.result, 0, true);
-    optionBox.appendChild(btn);
+    optBox.appendChild(btn);
   });
 }
 
 function showResult(result, nextIndex, isFromEasterEgg = false) {
-  const box = document.getElementById("question-box");
+  const qEl = document.getElementById("question");
+  const optBox = document.getElementById("options");
   const isVoid = result.includes("void") || result.includes("v͊");
 
+  // glitch 텍스트는 question에만 넣는다
   let displayText = result;
   if (isVoid) {
     displayText = result.replace(/(v͊.*?d̎[^ ]*)/gi, '<span class="glitch" data-text="$1">$1</span>');
   }
 
-  box.innerHTML = `<p>${displayText}</p>`;
+  qEl.innerHTML = displayText;
+  optBox.innerHTML = ""; // 버튼 잠깐 비우기
   updateTimerDisplay(result);
 
-  if (isVoid) {
-    document.body.classList.add("glitch-effect");
-  }
+  if (isVoid) document.body.classList.add("glitch-effect");
 
   const delayTime = isFromEasterEgg ? 4000 : 2000;
 
   setTimeout(() => {
-    if (isVoid) {
-      document.body.classList.remove("glitch-effect");
-    }
+    if (isVoid) document.body.classList.remove("glitch-effect");
 
     count++;
 
-    if (count === 15) showMidMessage("Has the Earth ever questioned what humans are?");
-    if (count === 20) showMidMessage("Still, humans see the Earth as something they cannot live without.");
-    if (count === 30) showMidMessage("But have they ever truly seen the Earth for what it is?");
     if (count === 10) showMidMessage("Has the Earth ever questioned what humans are?");
     if (count === 15) showMidMessage("Still, humans see the Earth as something they cannot live without.");
     if (count === 19) showMidMessage("But have they ever truly seen the Earth for what it is?");
@@ -160,7 +160,8 @@ function showResult(result, nextIndex, isFromEasterEgg = false) {
       }
     }
   }, delayTime);
-} // ✅ 이 중괄호가 빠져 있었음!!
+}
+
 
 
 let clickSoundEnabled = false;
