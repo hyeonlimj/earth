@@ -3,10 +3,9 @@ body {
   color: white;
   font-family: "Courier New", monospace;
   text-align: center;
-  margin-top: 30%;
   font-size: 24px;
 }
-
+html, body { margin: 0; height: 100%; }
 button {
   margin: 15px;
   padding: 15px 25px;
@@ -36,7 +35,7 @@ button:hover {
   border-radius: 0;
   box-shadow: none;
 }
-
+#question-box p,
 .glitch {
   font-size: 26px;
   line-height: 1.6;
@@ -158,13 +157,6 @@ button:hover {
   pointer-events: none;
 }
 .blackout.hide{ opacity: 0; }
-
-/* 축소 후 중앙정렬 보정 */
-.centered {
-  top: 50% !important;
-  left: 50% !important;
-  transform: translate(-50%, -50%) !important;
-}
 
 /* 나레이션 레이어 */
 #loop-message {
