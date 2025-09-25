@@ -63,12 +63,17 @@ function updateTimerDisplay(text) {
 function toggleCounter() {
   const display = document.getElementById('count-display');
   if (!display || !isCounting) return;
+
+  // ?? 상태면 카운트하지 않음
+  if (display.textContent.includes("??")) return;
+
   display.textContent = `00:00:${displayCount}`;
   displayCount += direction;
   if (displayCount <= 88 || displayCount >= 89) {
     direction *= -1;
   }
 }
+
 
 function handleSelection(selectedOption) {
   playClickSound(); // 클릭 사운드 재생
