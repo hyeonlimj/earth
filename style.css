@@ -1,210 +1,228 @@
-body {
-  background-color: black;
-  color: white;
-  font-family: 'Courier New', monospace;
-  text-align: center;
-  margin-top: 30%; /* 20% → 30% */
-  font-size: 24px; /* 기본 글자 크기 추가 */
+const questions = [
+  {
+    question: "There are 89 seconds left until Earth's destruction.",
+    options: [
+      { text: "In a world without humans?", result: "Time left until Earth's destruction: ∞", next: 1 },
+      { text: "In the world after the end?", result: "Time left until Earth's destruction: v̵̬͉̬̟̣̩͔͊͗̋̊̇̇̚̚͟ơ̧̭̱̤̟͖̭͎͛͂̍̀͢í̴̧̫̥͙̬̀́̐̾͋̿͑̄̅͢͢d̸̼̙̣͍̪̟̣͉̼̎́̑͌͌͆̓̕", next: 2 }
+    ]
+  },
+  {
+    question: "Time left until Earth's destruction: ∞",
+    options: [
+      { text: "In a world with humans?", result: "Time left until Earth's destruction: 89 seconds.", next: 0 },
+      { text: "In the world after the end?", result: "Time left until Earth's destruction: v̵̬͉̬̟̣̩͔͊͗̋̊̇̇̚̚͟ơ̧̭̱̤̟͖̭͎͛͂̍̀͢í̴̧̫̥͙̬̀́̐̾͋̿͑̄̅͢͢d̸̼̙̣͍̪̟̣͉̼̎́̑͌͗͆̓̕", next: 2 }
+    ]
+  },
+  {
+    question: "Time left until Earth's destruction: ??",
+    options: [
+      { text: "In a world with humans?", result: "Time left until Earth's destruction: 89 seconds.", next: 0 },
+      { text: "In a world without humans?", result: "Time left until Earth's destruction: ∞", next: 1 }
+    ]
+  }
+];
+
+const easterEgg = {
+  question: "Is this truly the end?",
+  options: [
+    { text: "Repetition is eternal.", result: "You exist within the cycle." },
+    { text: "It’s all just coincidence.", result: "No enlightenment lies here." }
+  ]
+};
+
+let current = 0;
+let count = 0;
+let showingEasterEgg = false;
+let displayCount = 89;
+let direction = -1;
+let isCounting = false;
+
+function updateTimerDisplay(text) {
+  const display = document.getElementById('count-display');
+  if (!display) return;
+
+  if (text.includes("89")) {
+    display.style.visibility = "visible";
+    displayCount = 89;
+    direction = -1;
+    isCounting = true;
+  } else if (text.includes("??")) {
+    display.textContent = "??:??:??";
+    display.style.visibility = "visible";
+    isCounting = false;
+  } else if (text.includes("∞")) {
+    display.textContent = "∞";
+    display.style.visibility = "visible";
+    isCounting = false;
+  } else {
+    display.style.visibility = "hidden";
+    isCounting = false;
+  }
 }
 
-button {
-  margin: 15px; /* 10px → 15px */
-  padding: 15px 25px; /* 10px 20px → 15px 30px */
-  background-color: black;
-  border: 1px solid white;
-  color: white;
-  font-size: 21px; /* 16px → 24px */
-  cursor: pointer;
+function toggleCounter() {
+  const display = document.getElementById('count-display');
+  if (!display || !isCounting) return;
+
+  if (display.textContent.includes("??")) return;
+
+  display.textContent = `00:00:${displayCount}`;
+  displayCount += direction;
+  if (displayCount <= 88 || displayCount >= 89) {
+    direction *= -1;
+  }
 }
 
-button:hover {
-  background-color: white;
-  color: black;
+function handleSelection(selectedOption) {
+  playClickSound();
+  const nextQuestionIndex = selectedOption.next;
+  const resultText = selectedOption.result;
+  showResult(resultText, nextQuestionIndex);
 }
 
-#question-box {
-  position: absolute;
-  top: 30%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  background: none; /* ✅ 배경 제거 */
-  padding: 0;        /* ✅ 여백 제거 */
-  border-radius: 0;  /* ✅ 테두리 둥글기 제거 */
-  box-shadow: none;  /* ✅ 그림자 제거 */
+function loadQuestion() {
+  const q = questions[current];
+  document.getElementById("question-box").innerHTML = `
+    <p id="question">${q.question}</p>
+    <div id="options"></div>
+  `;
+  updateTimerDisplay(q.question);
+
+  const optionBox = document.getElementById("options");
+  q.options.forEach(opt => {
+    const btn = document.createElement("button");
+    btn.textContent = opt.text;
+    btn.onclick = () => handleSelection(opt);
+    optionBox.appendChild(btn);
+  });
 }
 
-#question-box p,
-.glitch {
-  font-size: 26px;
-  line-height: 1.6;
-  margin-bottom: 15px;
+function loadEasterEgg() {
+  const q = easterEgg;
+  document.getElementById("question-box").innerHTML = `
+    <p id="question">${q.question}</p>
+    <div id="options"></div>
+  `;
+  const optionBox = document.getElementById("options");
+  q.options.forEach(opt => {
+    const btn = document.createElement("button");
+    btn.textContent = opt.text;
+    btn.onclick = () => showResult(opt.result, 0, true);
+    optionBox.appendChild(btn);
+  });
 }
 
-#options {
-  display: flex;
-  gap: 20px; /* 버튼 사이 간격 */
-  flex-wrap: wrap; /* 너무 좁으면 줄바꿈 */
-  justify-content: center;
+function showResult(result, nextIndex, isFromEasterEgg = false) {
+  const box = document.getElementById("question-box");
+  const isVoid = result.includes("void") || result.includes("v͊");
+
+  let displayText = result;
+  if (isVoid) {
+    displayText = result.replace(/(v͊.*?d̎[^ ]*)/gi, '<span class="glitch" data-text="$1">$1</span>');
+  }
+
+  box.innerHTML = `<p>${displayText}</p>`;
+  updateTimerDisplay(result);
+
+  if (isVoid) {
+    document.body.classList.add("glitch-effect");
+  }
+
+  const delayTime = isFromEasterEgg ? 4000 : 2000;
+
+  setTimeout(() => {
+    if (isVoid) {
+      document.body.classList.remove("glitch-effect");
+    }
+
+    count++;
+
+    if (count === 10) showMidMessage("Has the Earth ever questioned what humans are?");
+    if (count === 15) showMidMessage("Still, humans see the Earth as something they cannot live without.");
+    if (count === 19) showMidMessage("But have they ever truly seen the Earth for what it is?");
+
+    if (count >= 20 && !autoClickStarted) {
+      autoClickStarted = true;
+      triggerAutomatedMode();
+    }
+
+    if (isFromEasterEgg) {
+      showingEasterEgg = false;
+      current = nextIndex;
+      loadQuestion();
+    } else {
+      if (count % 10 === 0) {
+        showingEasterEgg = true;
+        loadEasterEgg();
+      } else {
+        current = nextIndex;
+        loadQuestion();
+      }
+    }
+  }, delayTime);
 }
 
-#music-btn {
-  position: fixed;
-  bottom: 10px;
-  right: 10px;
-  font-size: 18px; /* 12px → 18px */
-  padding: 8px 15px; /* 5px 10px → 8px 15px */
-  opacity: 0.6;
-  background: none;
-  border: 1px solid white;
-  color: white;
-  cursor: pointer;
-  z-index: 1000;
+let clickSoundEnabled = false;
+
+function playClickSound() {
+  if (!clickSoundEnabled) return;
+  const audio = document.getElementById("click-sound");
+  if (audio) {
+    audio.currentTime = 0;
+    audio.play();
+  }
 }
 
-#music-btn:hover {
-  opacity: 1;
-  background: white;
-  color: black;
+let autoClickInterval;
+
+function triggerAutomatedMode() {
+  const blackout = document.getElementById('blackout');
+  blackout.classList.remove('hide');
+
+  document.getElementById('bgm').pause();
+  clickSoundEnabled = true;
+
+  setTimeout(() => {
+    blackout.classList.add('hide');
+    document.body.classList.add('shrinked-view');
+
+    document.getElementById('question-box').classList.add('centered');
+
+    autoClickLoop();
+  }, 2000);
 }
 
-#count-display {
-  font-size: 36px; /* 24px → 36px */
-  margin-bottom: 15px;
-  letter-spacing: 3px; /* 2px → 3px */
-  font-family: 'Courier New', monospace;
-  visibility: hidden;
+function autoClickLoop() {
+  if (count >= 100) return;
+
+  // 🔥 20번째 이후 암전 + 타이머 멈춤 코드를 제거합니다.
+  // if (count >= 20) {
+  //   ...
+  //   return;
+  // }
+
+  const options = document.querySelectorAll('#options button');
+  if (options.length === 0) {
+    setTimeout(autoClickLoop, 500);
+    return;
+  }
+
+  const randomIndex = Math.floor(Math.random() * options.length);
+  playClickSound();
+  options[randomIndex].click();
+
+  setTimeout(autoClickLoop, 4000);
 }
 
-@keyframes shake {
-  0% { transform: translate(0, 0); }
-  25% { transform: translate(-1px, 1px); }
-  50% { transform: translate(1px, -1px); }
-  75% { transform: translate(-1px, 0); }
-  100% { transform: translate(0, 0); }
+function showMidMessage(message) {
+  const msgBox = document.getElementById("mid-message");
+  msgBox.textContent = message;
+  msgBox.style.opacity = "1";
+
+  setTimeout(() => {
+    msgBox.style.opacity = "0";
+  }, 3000);
 }
 
-#bg-video {
-  position: fixed;
-  top: 0;
-  left: 0;
-  min-width: 100%;
-  min-height: 100%;
-  object-fit: cover;
-  z-index: -1;
-  opacity: 0.2;
-  pointer-events: none;
-}
-
-#mid-message {
-  position: fixed;
-  top: 60%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: gray;
-  font-size: 30px; /* 20px → 30px */
-  opacity: 0;
-  transition: opacity 0.5s ease;
-  z-index: 1000;
-  pointer-events: none;
-}
-
-@keyframes glitchNoise {
-  0% { filter: contrast(1) brightness(1); transform: translate(0, 0); }
-  20% { filter: contrast(1.5) brightness(1.2); transform: translate(-2px, 1px); }
-  40% { filter: contrast(0.8) brightness(0.8); transform: translate(2px, -2px); }
-  60% { filter: contrast(1.2) brightness(1.5); transform: translate(-1px, 2px); }
-  80% { filter: contrast(1) brightness(1); transform: translate(1px, -1px); }
-  100% { filter: contrast(1) brightness(1); transform: translate(0, 0); }
-}
-
-.glitch-effect {
-  animation: glitchNoise 0.2s infinite;
-}
-
-/* 📼 화면 축소 및 암전 효과 */
-.shrinked-view {
-  transform: scale(0.5);
-  transform-origin: center center;
-  filter: brightness(0.5) blur(1px);
-  transition: all 1s ease-in-out;
-}
-
-/* 🖤 암전 화면 */
-.blackout {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw; height: 100vh;
-  background: black;
-  z-index: 9999;
-  opacity: 1;
-  transition: opacity 1s ease-in-out;
-  pointer-events: none;
-}
-.blackout.hide {
-  opacity: 0;
-}
-
-body.shrinked-view,
-html.shrinked-view {
-  overflow: hidden;
-}
-
-.centered {
-  top: 50% !important;
-  left: 50% !important; /* 이 부분을 추가하세요 */
-  transform: translate(-50%, -50%) !important;
-}
-
-#loop-message {
-  position: fixed;
-  top: 20%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 10001; /* shrinked-view 위에 위치하도록 더 크게 */
-  pointer-events: none;
-  transform-origin: center center;
-}
-
-body.shrinked-view #loop-message {
-  transform: scale(2) translate(-50%, -50%);
-}
-
-#loop-text {
-  top: 5%;
-  left: 50%;
-  color: white;
-  font-size: 5.5rem;         /* 🔥 더 큼직하게 */
-  font-weight: bold;         /* 🔥 굵게 */
-  text-shadow: 2px 2px 6px black;  /* 🔥 뚜렷하게 */
-  letter-spacing: 2px;
-  text-align: center;
-  transition: opacity 1s ease;
-  opacity: 0;
-}
-
-
-.modal {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw; height: 100vh;
-  background: rgba(0, 0, 0, 0.85);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 10000;
-}
-
-.hide {
-  display: none;
-}
-
-.fade-out {
-  opacity: 0;
-  filter: blur(3px);
-  transition: opacity 2s ease, filter 2s ease;
-}
+setInterval(toggleCounter, 1000);
+window.onload = loadQuestion;
