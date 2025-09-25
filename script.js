@@ -40,6 +40,7 @@ let direction = -1;
 let isCounting = false;
 let autoClickStarted = false;
 let clickSoundEnabled = false;
+let timerLocked = false; 
 
 /***** 유틸 *****/
 function $(sel) {
@@ -50,6 +51,14 @@ function $(sel) {
 function updateTimerDisplay(text) {
   const display = $("#count-display");
   if (!display) return;
+
+  // ✅ 잠금이 최우선
+  if (timerLocked) {
+    display.style.visibility = "visible";
+    display.textContent = "00:00:00";
+    isCounting = false;
+    return;
+  }
 
   const hasUnknown = text.includes("??");
   if (hasUnknown) {
@@ -77,18 +86,15 @@ function updateTimerDisplay(text) {
   }
 }
 
+
 /***** 1초마다 깜빡이는 카운터 *****/
 function toggleCounter() {
   const display = $("#count-display");
-  if (!display || !isCounting) return;
+  if (!display || !isCounting || timerLocked) return; // ✅ 잠금 시 아무 것도 안 함
 
   display.textContent = `00:00:${String(displayCount).padStart(2, "0")}`;
   displayCount += direction;
-
-  // 89 ↔ 88 사이 왕복
-  if (displayCount <= 88 || displayCount >= 89) {
-    direction *= -1;
-  }
+  if (displayCount <= 88 || displayCount >= 89) direction *= -1;
 }
 
 /***** 옵션 선택 *****/
@@ -102,11 +108,14 @@ function handleSelection(selectedOption) {
 /***** 질문 로드 *****/
 function loadQuestion() {
   const q = questions[current];
+
+  // 카운터는 그대로 두고, 질문/옵션만 교체
   $("#question-box").innerHTML = `
-    <div id="count-display">${$("#count-display")?.textContent || "00:00:89"}</div>
+    <div id="count-display">${$("#count-display")?.textContent || ""}</div>
     <p id="question">${q.question}</p>
     <div id="options"></div>
   `;
+
   updateTimerDisplay(q.question);
 
   const optionBox = $("#options");
@@ -121,13 +130,14 @@ function loadQuestion() {
 /***** 이스터에그 로드 *****/
 function loadEasterEgg() {
   const q = easterEgg;
+
   $("#question-box").innerHTML = `
-    <div id="count-display">${$("#count-display")?.textContent || "00:00:89"}</div>
+    <div id="count-display">${$("#count-display")?.textContent || ""}</div>
     <p id="question">${q.question}</p>
     <div id="options"></div>
   `;
-  const optionBox = $("#options");
 
+  const optionBox = $("#options");
   q.options.forEach((opt) => {
     const btn = document.createElement("button");
     btn.textContent = opt.text;
@@ -135,6 +145,7 @@ function loadEasterEgg() {
     optionBox.appendChild(btn);
   });
 }
+
 
 /***** 결과 표시 후 다음 진행 *****/
 function showResult(result, nextIndex, isFromEasterEgg = false) {
@@ -201,21 +212,29 @@ function playClickSound() {
   }
 }
 
-/***** 자동 모드 진입 *****/
 function triggerAutomatedMode() {
   const blackout = document.getElementById('blackout');
   const stage = document.getElementById('stage');
   const dim = document.getElementById('dim');
 
-  blackout.classList.remove('hide');   // 잠깐 암전
+  blackout.classList.remove('hide');
   document.getElementById('bgm').pause();
   clickSoundEnabled = true;
 
   setTimeout(() => {
-    blackout.classList.add('hide');    // 암전은 사라지고
-    dim.classList.remove('hide');      // ✅ 디밍은 계속 켜둔다 (계속 어둡게)
-    stage.classList.add('shrink');     // ✅ 축소를 무대(#stage)에 적용 → 항상 중앙
-    // 자동 클릭 시작
+    blackout.classList.add('hide');
+    dim.classList.remove('hide');
+    stage.classList.add('shrink');
+
+    // ✅ 여기서 타이머 끝(00:00:00)으로 고정
+    const display = document.getElementById('count-display');
+    if (display) {
+      display.style.visibility = 'visible';
+      display.textContent = '00:00:00';
+    }
+    isCounting = false;   // 카운터 멈춤
+    timerLocked = true;   // 이후 어떤 로직도 타이머를 바꾸지 못하게 잠금
+
     autoClickLoop();
   }, 2000);
 }
