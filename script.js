@@ -190,19 +190,28 @@ function triggerAutomatedMode() {
   }, 2000);
 }
 
-// ⬇️ 자동 모드 루프 함수 맨 아래에 추가
 function autoClickLoop() {
   if (count >= 100) return;
 
   // 🔥 20번째 이후 암전 + 타이머 멈춤
   if (count >= 20) {
     const blackout = document.getElementById('blackout');
-    blackout.classList.remove('hide'); // 암전 켜기
+    const timer = document.getElementById('count-display');
+
+    // 암전 켜기
+    blackout.classList.remove('hide');
+
+    // 타이머 00:00:00으로 세팅하고 깜빡임 멈춤
+    timer.textContent = "00:00:00";
+    isCounting = false;
 
     setTimeout(() => {
-      document.getElementById('count-display').textContent = "00:00:00";
-      isCounting = false; // 더 이상 깜빡이지 않음
-    }, 2000);
+      blackout.classList.add('hide');      // 암전 해제
+      timer.style.visibility = "visible"; // 타이머 다시 표시
+      // 필요한 경우 displayCount도 0으로 초기화
+      displayCount = 0;
+      direction = 1;
+    }, 2000); // 2초 후 암전 해제
 
     return; // 자동 클릭 중단
   }
@@ -219,7 +228,6 @@ function autoClickLoop() {
 
   setTimeout(autoClickLoop, 4000);
 }
-
 
 // ✅ 중간 메시지 함수는 함수 바깥에 위치해야 함
 function showMidMessage(message) {
