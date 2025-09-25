@@ -184,17 +184,28 @@ function triggerAutomatedMode() {
     blackout.classList.add('hide');
     document.body.classList.add('shrinked-view');
 
-    // 💡 여기서 중앙 정렬 클래스 추가
     document.getElementById('question-box').classList.add('centered');
 
-    autoClickLoop(); // 자동 클릭 시작
+    autoClickLoop();
   }, 2000);
 }
 
-let autoClickStarted = false;
-
+// ⬇️ 자동 모드 루프 함수 맨 아래에 추가
 function autoClickLoop() {
   if (count >= 100) return;
+
+  // 🔥 20번째 이후 암전 + 타이머 멈춤
+  if (count >= 20) {
+    const blackout = document.getElementById('blackout');
+    blackout.classList.remove('hide'); // 암전 켜기
+
+    setTimeout(() => {
+      document.getElementById('count-display').textContent = "00:00:00";
+      isCounting = false; // 더 이상 깜빡이지 않음
+    }, 2000);
+
+    return; // 자동 클릭 중단
+  }
 
   const options = document.querySelectorAll('#options button');
   if (options.length === 0) {
@@ -206,9 +217,9 @@ function autoClickLoop() {
   playClickSound();
   options[randomIndex].click();
 
-  // ⏱️ 여기 값을 조절하세요 (기본: 2500 → 예: 4000 = 4초)
   setTimeout(autoClickLoop, 4000);
 }
+
 
 // ✅ 중간 메시지 함수는 함수 바깥에 위치해야 함
 function showMidMessage(message) {
