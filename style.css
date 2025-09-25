@@ -36,7 +36,7 @@ button:hover {
   border-radius: 0;
   box-shadow: none;
 }
-#question-box p,
+
 .glitch {
   font-size: 26px;
   line-height: 1.6;
@@ -147,20 +147,17 @@ button:hover {
 }
 .dim.hide { display: none; }
 
-/* 기존 blackout은 잠깐 쓰는 풀블랙 */
-.blackout { /* (네가 쓰던 그대로 유지) */ }
-.blackout.hide { opacity: 0; }
-
-/* question-box는 기존처럼 중앙 정렬해도 되고,
-   #stage가 고정 중앙이라서 top: 30%도 OK */
-#question-box {
-  position: absolute;
-  top: 30%;
-  left: 50%;
-  transform: translateX(-50%);
-  /* ...나머지 기존 스타일 유지... */
+.blackout{
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: black;
+  z-index: 9999;
+  opacity: 1;
+  transition: opacity 1s ease-in-out;
+  pointer-events: none;
 }
-
+.blackout.hide{ opacity: 0; }
 
 /* 축소 후 중앙정렬 보정 */
 .centered {
@@ -179,7 +176,7 @@ button:hover {
   pointer-events: none;
   transform-origin: center center;
 }
-body.shrinked-view #loop-message { transform: scale(2) translate(-50%, -50%); }
+#stage.shrink #loop-message { transform: scale(2) translate(-50%, -50%); }
 #loop-text {
   top: 5%;
   left: 50%;
