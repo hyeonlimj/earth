@@ -194,26 +194,16 @@ function triggerAutomatedMode() {
 
 function autoClickLoop() {
   if (count >= 100) return;
-
-  // 🔥 20번째 이후 암전 + 타이머 멈춤 코드를 제거합니다.
-  // if (count >= 20) {
-  //   ...
-  //   return;
-  // }
-
   const options = document.querySelectorAll('#options button');
   if (options.length === 0) {
     setTimeout(autoClickLoop, 500);
     return;
   }
-
   const randomIndex = Math.floor(Math.random() * options.length);
   playClickSound();
   options[randomIndex].click();
-
   setTimeout(autoClickLoop, 4000);
 }
-
 function showMidMessage(message) {
   const msgBox = document.getElementById("mid-message");
   msgBox.textContent = message;
