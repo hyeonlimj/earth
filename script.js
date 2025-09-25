@@ -47,11 +47,11 @@ function updateTimerDisplay(text) {
     direction = -1;
     isCounting = true;
   } else if (text.includes("??")) {
-    display.textContent = "00:00:??";
+    display.textContent = "??:??:??";
     display.style.visibility = "visible";
     isCounting = false;
-  } else if (text.includes("void") || text.includes("v͊")) {
-    display.textContent = "v̵̬͉̬̟̣̩͔͊͗̋̊̇̇̚̚͟ơ̧̭̱̤̟͖̭͎͛͂̍̀͢í̴̧̫̥͙̬̀́̐̾͋̿͑̄̅͢͢d̸̼̙̣͍̪̟̣͉̼̎́̑͌͗͆̓̕";
+  } else if (text.includes("∞")) {
+    display.textContent = "∞";
     display.style.visibility = "visible";
     isCounting = false;
   } else {
