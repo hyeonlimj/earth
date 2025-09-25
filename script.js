@@ -41,7 +41,7 @@ function updateTimerDisplay(text) {
   const display = document.getElementById('count-display');
   if (!display) return;
 
-  if (text.includes("89초")) {
+  if (text.includes("89")) {
     display.style.visibility = "visible";
     displayCount = 89;
     direction = -1;
