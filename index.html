@@ -11,32 +11,38 @@
     <source src="https://i.imgur.com/l6iasXA.mp4" type="video/mp4" />
   </video>
 
-  <!-- 🔊 배경 음악 & 효과음 -->
-  <audio id="bgm" loop>
-    <source src="bgm.wav.wav" type="audio/wav" />
-  </audio>
-  <audio id="click-sound" src="click.wav" preload="auto"></audio>
-
-  <!-- 📺 질문 / 타이머 -->
-  <div id="question-box">
-    <div id="count-display">00:00:89</div>
-    <p id="question">불러오는 중...</p>
-    <div id="options"></div>
-  </div>
-
-  <!-- 중간 메시지 -->
-  <div id="mid-message"></div>
-
-  <!-- 🎵 음악 버튼 -->
-  <button id="music-btn" onclick="document.getElementById('bgm').play()">▶ 음악 켜기</button>
-
-  <!-- 암전 & 나레이션 -->
+  <!-- ✅ 암전(잠깐) + 디밍(계속) -->
   <div id="blackout" class="blackout hide"></div>
-  <div id="loop-message" class="hide">
-    <p id="loop-text" style="transition: opacity 1s ease; text-align: center; color: white; font-size: 1.5rem;"></p>
+  <div id="dim" class="dim hide"></div>
+
+  <!-- ✅ 전체 UI 래퍼: 축소/중앙 고정 대상 -->
+  <div id="stage">
+    <!-- 🔊 오디오 -->
+    <audio id="bgm" loop>
+      <source src="bgm.wav.wav" type="audio/wav" />
+    </audio>
+    <audio id="click-sound" src="click.wav" preload="auto"></audio>
+
+    <!-- 📺 질문 / 타이머 -->
+    <div id="question-box">
+      <div id="count-display">00:00:89</div>
+      <p id="question">불러오는 중...</p>
+      <div id="options"></div>
+    </div>
+
+    <!-- 중간 메시지 -->
+    <div id="mid-message"></div>
+
+    <!-- 🎵 음악 버튼 -->
+    <button id="music-btn" onclick="document.getElementById('bgm').play()">▶ 음악 켜기</button>
+
+    <!-- 나레이션 -->
+    <div id="loop-message" class="hide">
+      <p id="loop-text" style="transition: opacity 1s ease; text-align: center; color: white; font-size: 1.5rem;"></p>
+    </div>
   </div>
 
-  <!-- 🧠 스크립트 -->
   <script src="script.js"></script>
 </body>
+
 </html>
