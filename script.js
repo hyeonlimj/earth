@@ -61,7 +61,7 @@ function updateTimerDisplay(text) {
     direction = -1;
     isCounting = true;
   } else if (hasUnknown) {
-    display.textContent = "00:00:??";
+    display.textContent = "??:??:??";
     display.style.visibility = "visible";
     isCounting = false;
   } else if (hasVoid) {
@@ -201,16 +201,19 @@ function playClickSound() {
 
 /***** 자동 모드 진입 *****/
 function triggerAutomatedMode() {
-  const blackout = $("#blackout");
-  blackout.classList.remove("hide");
-  $("#bgm").pause();
+  const blackout = document.getElementById('blackout');
+  const stage = document.getElementById('stage');
+  const dim = document.getElementById('dim');
+
+  blackout.classList.remove('hide');   // 잠깐 암전
+  document.getElementById('bgm').pause();
   clickSoundEnabled = true;
 
   setTimeout(() => {
-    blackout.classList.add("hide");
-    document.body.classList.add("shrinked-view");
-    // 축소 후 중앙정렬
-    $("#question-box").classList.add("centered");
+    blackout.classList.add('hide');    // 암전은 사라지고
+    dim.classList.remove('hide');      // ✅ 디밍은 계속 켜둔다 (계속 어둡게)
+    stage.classList.add('shrink');     // ✅ 축소를 무대(#stage)에 적용 → 항상 중앙
+    // 자동 클릭 시작
     autoClickLoop();
   }, 2000);
 }
