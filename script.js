@@ -51,8 +51,15 @@ function updateTimerDisplay(text) {
   const display = $("#count-display");
   if (!display) return;
 
-  const hasVoid = text.includes("void") || text.includes("v͊");
   const hasUnknown = text.includes("??");
+  if (hasUnknown) {
+    display.textContent = "??:??:??";
+    display.style.visibility = "visible";
+    isCounting = false; // 카운터 완전 정지
+    return;
+  }
+
+  const hasVoid = text.includes("void") || text.includes("v͊");
   const has89sec = /89\s*seconds|89초/i.test(text);
 
   if (has89sec) {
@@ -60,13 +67,8 @@ function updateTimerDisplay(text) {
     displayCount = 89;
     direction = -1;
     isCounting = true;
-  } else if (hasUnknown) {
-    display.textContent = "??:??:??";
-    display.style.visibility = "visible";
-    isCounting = false;
   } else if (hasVoid) {
-    display.textContent =
-      "v̵̬͉̬̟̣̩͔͊͗̋̊̇̇̚̚͟ơ̧̭̱̤̟͖̭͎͛͂̍̀͢í̴̧̫̥͙̬̀́̐̾͋̿͑̄̅͢͢d̸̼̙̣͍̪̟̣͉̼̎́̑͌͗͆̓̕";
+    display.textContent = "v͊͗̋̊̇̇̚̚...";
     display.style.visibility = "visible";
     isCounting = false;
   } else {
