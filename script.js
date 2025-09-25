@@ -41,17 +41,17 @@ function updateTimerDisplay(text) {
   const display = document.getElementById('count-display');
   if (!display) return;
 
-  if (text.includes("89")) {
+  if (text.includes("89초")) {
     display.style.visibility = "visible";
     displayCount = 89;
     direction = -1;
     isCounting = true;
   } else if (text.includes("??")) {
-    display.textContent = "??:??:??";
+    display.textContent = "00:00:??";
     display.style.visibility = "visible";
     isCounting = false;
-  } else if (text.includes("∞")) {
-    display.textContent = "∞";
+  } else if (text.includes("void") || text.includes("v͊")) {
+    display.textContent = "v̵̬͉̬̟̣̩͔͊͗̋̊̇̇̚̚͟ơ̧̭̱̤̟͖̭͎͛͂̍̀͢í̴̧̫̥͙̬̀́̐̾͋̿͑̄̅͢͢d̸̼̙̣͍̪̟̣͉̼̎́̑͌͗͆̓̕";
     display.style.visibility = "visible";
     isCounting = false;
   } else {
@@ -63,17 +63,12 @@ function updateTimerDisplay(text) {
 function toggleCounter() {
   const display = document.getElementById('count-display');
   if (!display || !isCounting) return;
-
-  // ?? 상태면 카운트하지 않음
-  if (display.textContent.includes("??")) return;
-
   display.textContent = `00:00:${displayCount}`;
   displayCount += direction;
   if (displayCount <= 88 || displayCount >= 89) {
     direction *= -1;
   }
 }
-
 
 function handleSelection(selectedOption) {
   playClickSound(); // 클릭 사운드 재생
@@ -189,34 +184,29 @@ function triggerAutomatedMode() {
     blackout.classList.add('hide');
     document.body.classList.add('shrinked-view');
 
+    // 💡 여기서 중앙 정렬 클래스 추가
     document.getElementById('question-box').classList.add('centered');
 
+    autoClickLoop(); // 자동 클릭 시작
     autoClickLoop();
   }, 2000);
 }
 
+let autoClickStarted = false;
+
+// ⬇️ 자동 모드 루프 함수 맨 아래에 추가
 function autoClickLoop() {
   if (count >= 100) return;
 
   // 🔥 20번째 이후 암전 + 타이머 멈춤
   if (count >= 20) {
     const blackout = document.getElementById('blackout');
-    const timer = document.getElementById('count-display');
-
-    // 암전 켜기
-    blackout.classList.remove('hide');
-
-    // 타이머 00:00:00으로 세팅하고 깜빡임 멈춤
-    timer.textContent = "00:00:00";
-    isCounting = false;
+    blackout.classList.remove('hide'); // 암전 켜기
 
     setTimeout(() => {
-      blackout.classList.add('hide');      // 암전 해제
-      timer.style.visibility = "visible"; // 타이머 다시 표시
-      // 필요한 경우 displayCount도 0으로 초기화
-      displayCount = 0;
-      direction = 1;
-    }, 2000); // 2초 후 암전 해제
+      document.getElementById('count-display').textContent = "00:00:00";
+      isCounting = false; // 더 이상 깜빡이지 않음
+    }, 2000);
 
     return; // 자동 클릭 중단
   }
@@ -231,8 +221,10 @@ function autoClickLoop() {
   playClickSound();
   options[randomIndex].click();
 
+  // ⏱️ 여기 값을 조절하세요 (기본: 2500 → 예: 4000 = 4초)
   setTimeout(autoClickLoop, 4000);
 }
+
 
 // ✅ 중간 메시지 함수는 함수 바깥에 위치해야 함
 function showMidMessage(message) {
