@@ -117,25 +117,50 @@ button:hover {
   animation: glitchNoise 0.2s infinite;
 }
 
-/* 축소 & 암전 */
-.shrinked-view {
-  transform: scale(0.5);
-  transform-origin: center center;
-  filter: brightness(0.5) blur(1px);
-  transition: all 1s ease-in-out;
+/* 무대 래퍼: 항상 화면 정중앙 고정 */
+#stage {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 100vw;       /* 무대 전체로 잡고 */
+  height: 100vh;
+  transform: translate(-50%, -50%); /* 중앙 기준 */
+  transform-origin: center center;  /* 축소 기준 */
+  z-index: 500;       /* 비디오(-1) 위, 딤(8000)/블랙아웃(9999) 아래 */
 }
-.blackout {
+
+/* 축소 상태: 중앙에서 축소 + 살짝 어둡고 블러 */
+#stage.shrink {
+  transform: translate(-50%, -50%) scale(0.5);
+  filter: brightness(0.5) blur(1px);
+  transition: transform 1s ease-in-out, filter 1s ease-in-out;
+}
+
+/* 계속 어둡게 유지하는 디밍 오버레이 */
+.dim {
   position: fixed;
   top: 0; left: 0;
   width: 100vw; height: 100vh;
-  background: black;
-  z-index: 9999;
-  opacity: 1;
-  transition: opacity 1s ease-in-out;
+  background: rgba(0,0,0,0.6); /* 취향에 맞게 0.5~0.8 */
+  z-index: 8000;
   pointer-events: none;
 }
+.dim.hide { display: none; }
+
+/* 기존 blackout은 잠깐 쓰는 풀블랙 */
+.blackout { /* (네가 쓰던 그대로 유지) */ }
 .blackout.hide { opacity: 0; }
-body.shrinked-view, html.shrinked-view { overflow: hidden; }
+
+/* question-box는 기존처럼 중앙 정렬해도 되고,
+   #stage가 고정 중앙이라서 top: 30%도 OK */
+#question-box {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%);
+  /* ...나머지 기존 스타일 유지... */
+}
+
 
 /* 축소 후 중앙정렬 보정 */
 .centered {
